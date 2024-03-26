@@ -1,14 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Super Admin Dashboard</title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <script src="sript.js" async defer></script>
+    <div class="header">header</div>
+
+    <div class="sidebar">
+      <a href="#" onclick="loadHome()">Home</a>
+      <a href="#" onclick="loadManageOrganization()">Manage Organization</a>
+      <a href="#" onclick="loadManageAdmin()">Manage Admin</a>
+      <a href="#" onclick="loadManageSuperAdmin()">Manage Super Admin</a>
+      <a href="#" onclick="loadSystemSecurity()"
+        >System Security and Monitoring</a
+      >
+      <a href="#" onclick="loadSystemSettings()">System Settings</a>
+      <button class="logout-button" onclick="logout()">Logout</button>
+    </div>
+
+    <main class="main-section"></main>
+
+    <script src="sript.js"></script>
   </body>
 </html>
