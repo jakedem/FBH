@@ -163,10 +163,6 @@ body {
   box-sizing: border-box;
 }
 
-.organization-form select {
-  appearance: none; /* Remove default dropdown arrow */
-}
-
 .organization-form input[type="submit"] {
   width: 100%;
   padding: 10px;
@@ -182,6 +178,115 @@ body {
   background-color: #0056b3;
 }
 
+
+/* Manage Organization Style */
+.main-section-manage-organization {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  
+}
+
+/* Manage organization container styles */
+.manage-organization-container {
+  /* background-color: #f5f5f5; */
+  border-radius: 4px;
+  padding-right: 20px;
+  margin-right: 20px;
+}
+
+/* Options styles */
+.options {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  
+}
+
+.options input[type="text"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  flex-grow: 1; /* Allow input to fill remaining space */
+  margin-right: 5px;
+}
+
+.options button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.options img {
+  width: 20px;
+  height: 20px;
+}
+
+.options select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-left: 10px;
+}
+
+/* Organization section styles */
+.organization-section {
+  display: flex;
+}
+
+/* Organization list styles */
+.organization-list {
+  flex: 1;
+  padding: 10px;
+}
+
+.organization-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.organization-list th,
+.organization-list td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.organization-list th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+}
+
+/* Edit button styles */
+.organization-list button.edit {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff; /* Blue color for edit button */
+  color: #fff;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.organization-list button.edit:hover {
+  background-color: #0056b3; /* Darker blue color on hover */
+}
+
+/* Terminate button styles */
+.organization-list button.terminate {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #b90000de; /* Red color for terminate button */
+  color: #fff;
+  cursor: pointer;
+  margin-right: 5px;
+  margin-top: 5px;
+}
+
+.organization-list button.terminate:hover {
+  background-color: #b90000; /* Darker red color on hover */
+}
 
 /* Media query for small and extra-small screens */
 @media only screen and (max-width: 576px) {
@@ -209,6 +314,21 @@ body {
 
   .title-text {
     margin-top: 70px;
+  }
+  .header-text {
+    font-size: 17px;
+    padding-left: 10px;
+    padding-top: 3px;
+  }
+
+  .options select {
+    padding-right: 30px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 20px;
+    width: 100%; /* Make the select box fill the entire width */
+    max-width: 120px; /* Set a maximum width to prevent overflow */
+    box-sizing: border-box;
   }
 } 
 

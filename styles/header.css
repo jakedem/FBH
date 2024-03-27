@@ -13,3 +13,8 @@
   right: 0;
   z-index: 1000;
 }
+
+.header-text {
+  color: black; 
+  padding-left: 25px
+}
