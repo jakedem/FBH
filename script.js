@@ -7,13 +7,13 @@ function loadHome() {
     .catch((error) => console.error("Error loading home:", error));
 }
 
-function loadManageOrganization() {
-  fetch("organization.html")
+function loadAddOrganization() {
+  fetch("add-organization.html")
     .then((response) => response.text())
     .then((html) => {
       document.querySelector(".main-section").innerHTML = html;
     })
-    .catch((error) => console.error("Error loading organization:", error));
+    .catch((error) => console.error("Error loading add-organization:", error));
 }
 
 document.addEventListener("DOMContentLoaded", function () {

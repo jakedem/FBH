@@ -21,7 +21,7 @@ body {
 
 /* home style */
 
-.home-text {
+.title-text {
   color: #00000081;
   padding-top: 5px;
   padding-bottom: 10px;
@@ -132,6 +132,57 @@ body {
 }
 
 
+/* Add Organization Style*/
+.organization-form {
+  max-width: 400px;
+  margin: 0 auto; /* Center horizontally */
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.organization-form h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.organization-form label {
+  font-weight: bold;
+}
+
+.organization-form input[type="text"],
+.organization-form input[type="email"],
+.organization-form input[type="password"],
+.organization-form select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.organization-form select {
+  appearance: none; /* Remove default dropdown arrow */
+}
+
+.organization-form input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.organization-form input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+
 /* Media query for small and extra-small screens */
 @media only screen and (max-width: 576px) {
 
@@ -156,7 +207,7 @@ body {
     display: block;
   }
 
-  .home-text {
+  .title-text {
     margin-top: 70px;
   }
 } 
