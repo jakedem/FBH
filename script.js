@@ -17,10 +17,10 @@ function loadAddOrganization() {
 }
 
 function loadManageOrganization() {
-  fetch("manage-organization.html")
+  fetch("manage-organization.php")
     .then((response) => response.text())
-    .then((html) => {
-      document.querySelector(".main-section").innerHTML = html;
+    .then((php) => {
+      document.querySelector(".main-section").innerHTML = php;
     })
     .catch((error) => console.error("Error loading add-organization:", error));
 }

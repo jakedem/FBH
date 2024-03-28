@@ -1,0 +1,106 @@
+/* Manage Organization Style */
+.main-section-manage-organization {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  
+}
+
+/* Manage organization container styles */
+.manage-organization-container {
+  /* background-color: #f5f5f5; */
+  border-radius: 4px;
+  padding-right: 20px;
+  margin-right: 20px;
+}
+
+/* Options styles */
+.options {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  
+}
+
+.options input[type="text"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  flex-grow: 1; 
+  margin-right: 5px;
+}
+
+.options button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.options img {
+  width: 20px;
+  height: 20px;
+}
+
+.options select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-left: 10px;
+}
+
+.organization-section {
+  display: flex;
+}
+
+.organization-list {
+  flex: 1;
+  padding: 10px;
+}
+
+.organization-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.organization-list th,
+.organization-list td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.organization-list th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+}
+
+/* Edit button styles */
+.organization-list button.edit {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff; 
+  color: #fff;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.organization-list button.edit:hover {
+  background-color: #0056b3;
+}
+
+/* Terminate button styles */
+.organization-list button.terminate {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #b90000de;
+  color: #fff;
+  cursor: pointer;
+  margin-right: 5px;
+  margin-top: 5px;
+}
+
+.organization-list button.terminate:hover {
+  background-color: #b90000; 
+}

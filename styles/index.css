@@ -1,0 +1,79 @@
+body {
+  padding-top: 80;
+  padding-left: 60px;
+  padding-right: 80px;
+  font-family: Arial, sans-serif;
+  background-color: #ebe8e8;
+}
+
+.menu-icon {
+  display: none;
+  cursor: pointer;
+  width: 40px;
+  padding-left: 10px;
+}
+
+.main-section {
+  padding-top: 30px;
+  padding-left: 260px;
+  margin-top: 50px;
+}
+
+.title-text {
+  color: #00000081;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  padding-left: 0px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  font-size: 25px;
+  border-bottom: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(255, 255, 255);
+}
+
+
+/* Media query for small and extra-small screens */
+@media only screen and (max-width: 576px) {
+
+ body {
+  padding-left: 10px;
+  padding-right: 10px;
+ }
+
+  .top-cards,
+  .bottom-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    display: none; 
+  }
+
+  .main-section {
+    padding: 0px; 
+}
+  .menu-icon{
+    display: block;
+  }
+
+  .title-text {
+    margin-top: 70px;
+  }
+  .header-text {
+    font-size: 17px;
+    padding-left: 10px;
+    padding-top: 3px;
+  }
+
+  .options select {
+    padding-right: 30px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 20px;
+    width: 100%; 
+    max-width: 120px; /* Set a maximum width to prevent overflow */
+    box-sizing: border-box;
+  }
+} 
+
