@@ -1,4 +1,4 @@
-// External script file (script.js)
+// external script file (script.js)
 
 function loadHome() {
   fetch("home.html")
@@ -64,10 +64,26 @@ function initializeOrganizationManagement() {
       .then((response) => response.text())
       .then((data) => {
         organizationTableBody.innerHTML = data;
+        // Call function to attach event listeners to View buttons
+        attachViewButtonListeners();
       })
       .catch((error) =>
         console.error("Error loading organization data:", error)
       );
+  }
+
+  // Function to attach event listeners to View buttons
+  function attachViewButtonListeners() {
+    const viewButtons = document.querySelectorAll(".view");
+
+    viewButtons.forEach((button) => {
+      button.addEventListener("click", function () {
+        // Get the organization ID from the data-org-id attribute
+        const orgId = button.getAttribute("data-org-id");
+        // Navigate to the organization details page with the organization ID
+        window.location.href = `get-organization-details.php?orgId=${orgId}`;
+      });
+    });
   }
 
   // Function to handle organization search
@@ -81,6 +97,8 @@ function initializeOrganizationManagement() {
         .then((response) => response.text())
         .then((data) => {
           organizationTableBody.innerHTML = data;
+          // After loading search results, reattach event listeners to View buttons
+          attachViewButtonListeners();
         })
         .catch((error) =>
           console.error("Error searching organizations:", error)

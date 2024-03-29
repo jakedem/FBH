@@ -7,6 +7,7 @@
   <title>Manage Organization</title>
   <link rel="stylesheet" href="./styles/manage-organization.css" />
   <link rel="stylesheet" href="./styles/index.css" />
+  <link rel="stylesheet" href="./styles/header.css" />
 </head>
 
 <body>
@@ -39,7 +40,11 @@
         </div>
       </div>
     </div>
+
+
+
   </main>
+
 
   <script src="script.js"></script>
 

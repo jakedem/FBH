@@ -75,7 +75,7 @@
 }
 
 /* Edit button styles */
-.organization-list button.edit {
+.organization-list button.view {
   padding: 5px 10px;
   border: none;
   border-radius: 4px;
@@ -85,7 +85,7 @@
   margin-right: 5px;
 }
 
-.organization-list button.edit:hover {
+.organization-list button.view:hover {
   background-color: #0056b3;
 }
 

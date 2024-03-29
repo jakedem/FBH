@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 }
 
 // Fetch organization names with orgType = 'education' from the database
-$sql = "SELECT orgName FROM Organizations WHERE orgType = 'business'";
+$sql = "SELECT orgId, orgName FROM Organizations WHERE orgType = 'business'";
 $result = $conn->query($sql);
 
 // Check if any organizations are found
@@ -24,7 +24,7 @@ if ($result->num_rows > 0) {
     echo "<tr>";
     echo "<td>" . $row["orgName"] . "</td>";
     echo "<td>";
-    echo "<button class='edit'>View</button>";
+    echo "<button class='view' data-org-id='" . $row["orgId"] . "'>View</button>";
     echo "<button class='terminate'>Terminate</button>";
     echo "</td>";
     echo "</tr>";

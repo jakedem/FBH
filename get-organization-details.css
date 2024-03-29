@@ -1,0 +1,34 @@
+/* styles.css */
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #007bff; /* Blue background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.organization-details {
+  background-color: #ebe8e8; /* White background */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 40px; /* Increased padding */
+  width: 80%; /* Stretch to 80% of the viewport width */
+  max-width: 600px;
+}
+
+.organization-details h2 {
+  color: #b90000; /* Red heading */
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.organization-details p {
+  margin-bottom: 10px;
+}
+
+.organization-details strong {
+  font-weight: bold;
+  margin-right: 5px;
+}

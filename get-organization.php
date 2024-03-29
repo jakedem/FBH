@@ -5,8 +5,6 @@ $username = "root";
 $password = "";
 $database = "fbh";
 
-
-
 // Create connection
 $conn = new mysqli($servername, $username, $password, $database);
 
@@ -20,11 +18,11 @@ $filter = isset($_GET['filter']) ? $_GET['filter'] : 'all';
 
 // Fetch organization data from the database based on the filter value
 if ($filter === 'all') {
-  $sql = "SELECT orgName FROM Organizations";
+  $sql = "SELECT orgId, orgName FROM Organizations";
 } elseif ($filter === 'education') {
-  $sql = "SELECT orgName FROM Organizations WHERE orgType = 'education'";
+  $sql = "SELECT orgId, orgName FROM Organizations WHERE orgType = 'education'";
 } elseif ($filter === 'business') {
-  $sql = "SELECT orgName FROM Organizations WHERE orgType = 'business'";
+  $sql = "SELECT orgId, orgName FROM Organizations WHERE orgType = 'business'";
 } else {
   echo "Invalid filter value";
 }
@@ -38,7 +36,7 @@ if ($result->num_rows > 0) {
     echo "<tr>";
     echo "<td>" . $row["orgName"] . "</td>";
     echo "<td>";
-    echo "<button class='edit'>View</button>";
+    echo "<button class='view' data-org-id='" . $row["orgId"] . "'>View</button>";
     echo "<button class='terminate'>Terminate</button>";
     echo "</td>";
     echo "</tr>";

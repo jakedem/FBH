@@ -23,7 +23,7 @@ if (isset($_GET['searchQuery'])) {
   $sanitizedSearchQuery = mysqli_real_escape_string($connection, $searchQuery);
 
   // Construct the SQL query to search for organizations
-  $sql = "SELECT orgName FROM organizations WHERE orgName LIKE '%$sanitizedSearchQuery%'";
+  $sql = "SELECT orgId, orgName FROM organizations WHERE orgName LIKE '%$sanitizedSearchQuery%'";
 
   // Execute the SQL query
   $result = mysqli_query($connection, $sql);
@@ -36,7 +36,7 @@ if (isset($_GET['searchQuery'])) {
       echo "<tr>";
       echo "<td>" . $row["orgName"] . "</td>";
       echo "<td>";
-      echo "<button class='edit'>View</button>";
+      echo "<button class='view' data-org-id='" . $row["orgId"] . "'>View</button>";
       echo "<button class='terminate'>Terminate</button>";
       echo "</td>";
       echo "</tr>";
