@@ -38,7 +38,7 @@ if ($result->num_rows > 0) {
     echo "<tr>";
     echo "<td>" . $row["orgName"] . "</td>";
     echo "<td>";
-    echo "<button class='edit'>Edit</button>";
+    echo "<button class='edit'>View</button>";
     echo "<button class='terminate'>Terminate</button>";
     echo "</td>";
     echo "</tr>";

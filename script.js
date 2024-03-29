@@ -1,4 +1,4 @@
-// external script file (script.js)
+// External script file (script.js)
 
 function loadHome() {
   fetch("home.html")
@@ -70,11 +70,36 @@ function initializeOrganizationManagement() {
       );
   }
 
+  // Function to handle organization search
+  function searchOrganizations() {
+    const searchInput = document.querySelector('.options input[type="text"]');
+    const searchQuery = searchInput.value.trim();
+
+    if (searchQuery !== "") {
+      // Fetch data from the PHP script for search
+      fetch(`search-organizations.php?searchQuery=${searchQuery}`)
+        .then((response) => response.text())
+        .then((data) => {
+          organizationTableBody.innerHTML = data;
+        })
+        .catch((error) =>
+          console.error("Error searching organizations:", error)
+        );
+    } else {
+      // If search query is empty, load data based on filter
+      loadOrganizationData();
+    }
+  }
+
   // Load organization data initially when the page loads
   loadOrganizationData();
 
   // Listen for changes in the select element
   organizationFilter.addEventListener("change", loadOrganizationData);
+
+  // Listen for input events on the search field
+  const searchInput = document.querySelector('.options input[type="text"]');
+  searchInput.addEventListener("input", searchOrganizations);
 }
 
 document.addEventListener("DOMContentLoaded", function () {

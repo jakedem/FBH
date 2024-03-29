@@ -15,7 +15,7 @@
     <div class="manage-organization-container">
       <div class="options">
         <input type="text" placeholder="Search Organizations" />
-        <button><img src="./icons/search.svg" alt="Search" /></button>
+        <button id="searchButton"><img src="./icons/search.svg" alt="Search" /></button>
         <select id="organizationFilter">
           <option value="all">All</option>
           <option value="education">Education</option>
