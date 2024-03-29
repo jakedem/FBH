@@ -1,3 +1,5 @@
+// external script file (script.js)
+
 function loadHome() {
   fetch("home.html")
     .then((response) => response.text())
@@ -19,10 +21,60 @@ function loadAddOrganization() {
 function loadManageOrganization() {
   fetch("manage-organization.php")
     .then((response) => response.text())
-    .then((php) => {
-      document.querySelector(".main-section").innerHTML = php;
+    .then((html) => {
+      document.querySelector(".main-section").innerHTML = html;
+      // Once the HTML content is loaded, execute the organization management logic
+      initializeOrganizationManagement();
     })
-    .catch((error) => console.error("Error loading add-organization:", error));
+    .catch((error) =>
+      console.error("Error loading manage-organization:", error)
+    );
+}
+
+function initializeOrganizationManagement() {
+  const organizationFilter = document.getElementById("organizationFilter");
+  const organizationTableBody = document.getElementById(
+    "organizationTableBody"
+  );
+
+  // Function to load organization data based on selected filter
+  function loadOrganizationData() {
+    const filterValue = organizationFilter.value;
+
+    // Clear the table body first
+    organizationTableBody.innerHTML = "";
+
+    // Load different PHP files based on the selected filter
+    let phpFile = "";
+
+    switch (filterValue) {
+      case "education":
+        phpFile = "get-education.php";
+        break;
+      case "business":
+        phpFile = "get-business.php";
+        break;
+      default:
+        phpFile = "get-organization.php";
+        break;
+    }
+
+    // Fetch data from the selected PHP file
+    fetch(phpFile)
+      .then((response) => response.text())
+      .then((data) => {
+        organizationTableBody.innerHTML = data;
+      })
+      .catch((error) =>
+        console.error("Error loading organization data:", error)
+      );
+  }
+
+  // Load organization data initially when the page loads
+  loadOrganizationData();
+
+  // Listen for changes in the select element
+  organizationFilter.addEventListener("change", loadOrganizationData);
 }
 
 document.addEventListener("DOMContentLoaded", function () {

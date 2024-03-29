@@ -5,8 +5,6 @@ $username = "root";
 $password = "";
 $database = "fbh";
 
-
-
 // Create connection
 $conn = new mysqli($servername, $username, $password, $database);
 
@@ -15,20 +13,8 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-// Check the filter value
-$filter = isset($_GET['filter']) ? $_GET['filter'] : 'all';
-
-// Fetch organization data from the database based on the filter value
-if ($filter === 'all') {
-  $sql = "SELECT orgName FROM Organizations";
-} elseif ($filter === 'education') {
-  $sql = "SELECT orgName FROM Organizations WHERE orgType = 'education'";
-} elseif ($filter === 'business') {
-  $sql = "SELECT orgName FROM Organizations WHERE orgType = 'business'";
-} else {
-  echo "Invalid filter value";
-}
-
+// Fetch organization names with orgType = 'education' from the database
+$sql = "SELECT orgName FROM Organizations WHERE orgType = 'business'";
 $result = $conn->query($sql);
 
 // Check if any organizations are found
@@ -44,7 +30,7 @@ if ($result->num_rows > 0) {
     echo "</tr>";
   }
 } else {
-  echo "<tr><td colspan='2'>No organizations found</td></tr>";
+  echo "No organizations with orgType 'education' found";
 }
 
 // Close connection
