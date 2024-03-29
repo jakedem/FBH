@@ -1,0 +1,54 @@
+/* Modal styles */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 8%;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(24, 23, 23, 0.500); 
+}
+
+/* Modal content */
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto; /* Center vertically and horizontally */
+  
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%; /* Adjust width as needed */
+  max-width: 600px; /* Maximum width */
+  text-align: center; /* Center text */
+  border-radius: 10px;
+  border-color: #0056b3;
+}
+
+/* Close button */
+.close {
+  color: #b90000;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #b90000de;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Custom styling for organization details */
+.modal-content h2 {
+  color: #b90000; /* Red color for heading */
+}
+
+.modal-content p strong {
+  color: #0056b3; /* Blue color for labels */
+}
+
+.modal-content p span {
+  color: #000; /* Black color for values */
+}

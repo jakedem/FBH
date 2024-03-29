@@ -27,31 +27,17 @@ if (isset($_GET['orgId'])) {
   if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
 
-    // Store organization details in variables
-    $orgId = $row['orgId'];
-    $orgName = $row['orgName'];
-    $orgType = $row['orgType'];
-    $address = $row['address'];
+    // Store organization details in an associative array
+    $orgDetails = array(
+      'orgId' => $row['orgId'],
+      'orgName' => $row['orgName'],
+      'orgType' => $row['orgType'],
+      'address' => $row['address']
+    );
 
-    // Output organization details with styling
-    echo "<!DOCTYPE html>";
-    echo "<html lang='en'>";
-    echo "<head>";
-    echo "<meta charset='UTF-8'>";
-    echo "<meta name='viewport' content='width=device-width, initial-scale=1.0'>";
-    echo "<title>Organization Details</title>";
-    echo "<link rel='stylesheet' href='get-organization-details.css'>"; // Include the external CSS file
-    echo "</head>";
-    echo "<body>";
-    echo "<div class='organization-details'>";
-    echo "<h2>Organization Details</h2>";
-    echo "<p><strong>Organization ID:</strong> $orgId</p>";
-    echo "<p><strong>Name:</strong> $orgName</p>";
-    echo "<p><strong>Type:</strong> $orgType</p>";
-    echo "<p><strong>Address:</strong> $address</p>";
-    echo "</div>";
-    echo "</body>";
-    echo "</html>";
+    // Return organization details as JSON
+    header('Content-Type: application/json');
+    echo json_encode($orgDetails);
   } else {
     echo "Organization not found.";
   }

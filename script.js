@@ -72,6 +72,35 @@ function initializeOrganizationManagement() {
       );
   }
 
+  // Function to display organization details in a modal
+  function displayOrganizationModal(orgId) {
+    // Fetch organization details from the server
+    fetch(`get-organization-details.php?orgId=${orgId}`)
+      .then((response) => response.json())
+      .then((data) => {
+        // Populate the modal with organization details
+        document.getElementById("modalOrgId").textContent = data.orgId;
+        document.getElementById("modalOrgName").textContent = data.orgName;
+        document.getElementById("modalOrgType").textContent = data.orgType;
+        document.getElementById("modalAddress").textContent = data.address;
+
+        // Show the modal
+        document.getElementById("organizationModal").style.display = "block";
+
+        // Attach event listener to the close button
+        document.getElementById("closeModal").onclick = function () {
+          closeModal();
+        };
+      })
+      .catch((error) =>
+        console.error("Error fetching organization details:", error)
+      );
+  }
+
+  // Function to close the modal
+  function closeModal() {
+    document.getElementById("organizationModal").style.display = "none";
+  }
   // Function to attach event listeners to View buttons
   function attachViewButtonListeners() {
     const viewButtons = document.querySelectorAll(".view");
@@ -80,8 +109,8 @@ function initializeOrganizationManagement() {
       button.addEventListener("click", function () {
         // Get the organization ID from the data-org-id attribute
         const orgId = button.getAttribute("data-org-id");
-        // Navigate to the organization details page with the organization ID
-        window.location.href = `get-organization-details.php?orgId=${orgId}`;
+        // Display organization details in modal
+        displayOrganizationModal(orgId);
       });
     });
   }
