@@ -84,6 +84,12 @@ function initializeOrganizationManagement() {
         document.getElementById("modalOrgType").textContent = data.orgType;
         document.getElementById("modalAddress").textContent = data.address;
 
+        // Populate the modal with admin details
+        document.getElementById("modalAdminId").textContent = data.adminId;
+        document.getElementById("modalAdminName").textContent = data.adminName;
+        document.getElementById("modalAdminEmail").textContent =
+          data.adminEmail;
+
         // Show the modal
         document.getElementById("organizationModal").style.display = "block";
 

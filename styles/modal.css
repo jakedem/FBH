@@ -45,6 +45,10 @@
   color: #b90000; /* Red color for heading */
 }
 
+.modal-content h3 {
+  color: #b90000; /* Red color for heading */
+}
+
 .modal-content p strong {
   color: #0056b3; /* Blue color for labels */
 }
