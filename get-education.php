@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 }
 
 // Fetch organization names with orgType = 'education' from the database
-$sql = "SELECT orgId,orgName FROM Organizations WHERE orgType = 'education'";
+$sql = "SELECT orgId, orgName FROM Organizations WHERE orgType = 'education' AND (approval_status IS NULL OR approval_status = '')";
 $result = $conn->query($sql);
 
 // Check if any organizations are found

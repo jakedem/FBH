@@ -23,7 +23,7 @@ if (isset($_GET['searchQuery'])) {
   $sanitizedSearchQuery = mysqli_real_escape_string($connection, $searchQuery);
 
   // Construct the SQL query to search for organizations
-  $sql = "SELECT orgId, orgName FROM organizations WHERE orgName LIKE '%$sanitizedSearchQuery%'";
+  $sql = "SELECT orgId, orgName FROM organizations WHERE orgName LIKE '%$sanitizedSearchQuery%' AND approval_status IS NOT NULL AND approval_status != ''";
 
   // Execute the SQL query
   $result = mysqli_query($connection, $sql);

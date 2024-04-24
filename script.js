@@ -320,7 +320,7 @@ function initializeApprovedOrganizationManagement() {
 
     if (searchQuery !== "") {
       // Fetch data from the PHP script for search
-      fetch(`approved-search-organizations.php?searchQuery=${searchQuery}`)
+      fetch(`search-approved-organizations.php?searchQuery=${searchQuery}`)
         .then((response) => response.text())
         .then((data) => {
           organizationTableBody.innerHTML = data;

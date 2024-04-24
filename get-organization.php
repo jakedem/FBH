@@ -18,11 +18,11 @@ $filter = isset($_GET['filter']) ? $_GET['filter'] : 'all';
 
 // Fetch organization data from the database based on the filter value
 if ($filter === 'all') {
-  $sql = "SELECT orgId, orgName FROM Organizations";
+  $sql = "SELECT orgId, orgName FROM Organizations WHERE approval_status IS NULL OR approval_status = ''";
 } elseif ($filter === 'education') {
-  $sql = "SELECT orgId, orgName FROM Organizations WHERE orgType = 'education'";
+  $sql = "SELECT orgId, orgName FROM Organizations WHERE orgType = 'education' AND (approval_status IS NULL OR approval_status = '')";
 } elseif ($filter === 'business') {
-  $sql = "SELECT orgId, orgName FROM Organizations WHERE orgType = 'business'";
+  $sql = "SELECT orgId, orgName FROM Organizations WHERE orgType = 'business' AND (approval_status IS NULL OR approval_status = '')";
 } else {
   echo "Invalid filter value";
 }
