@@ -13,37 +13,26 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-// Check the filter value
-$filter = isset($_GET['filter']) ? $_GET['filter'] : 'all';
+// Fetch organization names with orgType = 'education' and approval_status = 'Approved' from the database
+$sql = "SELECT orgId, orgName FROM organizations WHERE orgType = 'education' AND approval_status = 'Approved'";
 
-// Fetch organization data from the database based on the filter value
-if ($filter === 'all') {
-  $sql = "SELECT orgId, orgName FROM Organizations";
-} elseif ($filter === 'education') {
-  $sql = "SELECT orgId, orgName FROM Organizations WHERE orgType = 'education'";
-} elseif ($filter === 'business') {
-  $sql = "SELECT orgId, orgName FROM Organizations WHERE orgType = 'business'";
-} else {
-  echo "Invalid filter value";
-}
-
+// Execute the SQL query
 $result = $conn->query($sql);
 
 // Check if any organizations are found
-if ($result->num_rows > 0) {
+if ($result !== false && $result->num_rows > 0) {
   // Output data of each row
   while ($row = $result->fetch_assoc()) {
     echo "<tr>";
     echo "<td>" . $row["orgName"] . "</td>";
     echo "<td>";
     echo "<button class='view' data-org-id='" . $row["orgId"] . "'>View</button>";
-    echo "<button class='approve' data-org-id='" . $row["orgId"] . "'>Approve</button>";
     echo "<button class='terminate'>Terminate</button>";
     echo "</td>";
     echo "</tr>";
   }
 } else {
-  echo "<tr><td colspan='2'>No organizations found</td></tr>";
+  echo "No organizations with orgType 'education' and 'Approved' status found";
 }
 
 // Close connection
@@ -67,5 +56,4 @@ echo <<<HTML
     <p><strong>Admin Email:</strong> <span id="modalAdminEmail"></span></p>
   </div>
 </div>
-
 HTML;

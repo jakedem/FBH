@@ -25,6 +25,7 @@ if ($result->num_rows > 0) {
     echo "<td>" . $row["orgName"] . "</td>";
     echo "<td>";
     echo "<button class='view' data-org-id='" . $row["orgId"] . "'>View</button>";
+    echo "<button class='approve' data-org-id='" . $row["orgId"] . "'>Approve</button>";
     echo "<button class='terminate'>Terminate</button>";
     echo "</td>";
     echo "</tr>";
