@@ -42,6 +42,11 @@ function loadManageOrganization() {
     );
 }
 
+function openOrganizationsPage() {
+  // Open the organizations.php page in a new tab
+  window.open("organizations.php", "_blank");
+}
+
 function initializeOrganizationManagement() {
   const organizationFilter = document.getElementById("organizationFilter");
   const organizationTableBody = document.getElementById(
@@ -135,20 +140,6 @@ function initializeOrganizationManagement() {
     });
   }
 
-  // Function to attach event listeners to "Approve" buttons
-  function attachApproveButtonListeners() {
-    const approveButtons = document.querySelectorAll(".approve");
-
-    approveButtons.forEach((button) => {
-      button.addEventListener("click", function () {
-        // Get the organization ID from the data-org-id attribute
-        const orgId = button.getAttribute("data-org-id");
-        // Send AJAX request to approve organization
-        approveOrganization(orgId);
-      });
-    });
-  }
-
   // Function to handle organization search
   function searchOrganizations() {
     const searchInput = document.querySelector('.options input[type="text"]');
@@ -174,6 +165,26 @@ function initializeOrganizationManagement() {
     }
   }
 
+  // Function to display approval success alert
+  function displayApprovalSuccessAlert() {
+    // Show an alert indicating approval success
+    alert("Organization approved successfully!");
+  }
+
+  // Function to attach event listeners to "Approve" buttons
+  function attachApproveButtonListeners() {
+    const approveButtons = document.querySelectorAll(".approve");
+
+    approveButtons.forEach((button) => {
+      button.addEventListener("click", function () {
+        // Get the organization ID from the data-org-id attribute
+        const orgId = button.getAttribute("data-org-id");
+        // Send AJAX request to approve organization
+        approveOrganization(orgId);
+      });
+    });
+  }
+
   // Function to approve organization via AJAX
   function approveOrganization(orgId) {
     const xhr = new XMLHttpRequest();
@@ -184,6 +195,8 @@ function initializeOrganizationManagement() {
         if (xhr.status === 200) {
           // Request was successful
           console.log(xhr.responseText);
+          // Display approval success modal
+          displayApprovalSuccessAlert();
           // Reload organization data after approval
           loadOrganizationData();
         } else {
@@ -299,20 +312,6 @@ function initializeApprovedOrganizationManagement() {
     });
   }
 
-  // Function to attach event listeners to "Approve" buttons
-  function attachApproveButtonListeners() {
-    const approveButtons = document.querySelectorAll(".approve");
-
-    approveButtons.forEach((button) => {
-      button.addEventListener("click", function () {
-        // Get the organization ID from the data-org-id attribute
-        const orgId = button.getAttribute("data-org-id");
-        // Send AJAX request to approve organization
-        approveOrganization(orgId);
-      });
-    });
-  }
-
   // Function to handle organization search
   function searchOrganizations() {
     const searchInput = document.querySelector('.options input[type="text"]');
@@ -336,27 +335,6 @@ function initializeApprovedOrganizationManagement() {
       // If search query is empty, load data based on filter
       loadOrganizationData();
     }
-  }
-
-  // Function to approve organization via AJAX
-  function approveOrganization(orgId) {
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "approve-organization.php", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === XMLHttpRequest.DONE) {
-        if (xhr.status === 200) {
-          // Request was successful
-          console.log(xhr.responseText);
-          // Reload organization data after approval
-          loadOrganizationData();
-        } else {
-          // Request failed
-          console.error("Error:", xhr.statusText);
-        }
-      }
-    };
-    xhr.send("orgId=" + encodeURIComponent(orgId));
   }
 
   // Load organization data initially when the page loads

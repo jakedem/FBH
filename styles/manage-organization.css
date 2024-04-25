@@ -102,7 +102,7 @@
 }
 
 .organization-list button.approve:hover {
-  background-color: #094b0d;
+  background-color: #0b6d11;
 }
 
 
@@ -119,5 +119,5 @@
 }
 
 .organization-list button.terminate:hover {
-  background-color: #b90000; 
+  background-color: #9b0909; 
 }
