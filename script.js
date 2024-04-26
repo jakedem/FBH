@@ -3,6 +3,31 @@ function loadHome() {
     .then((response) => response.text())
     .then((html) => {
       document.querySelector(".main-section").innerHTML = html;
+
+      // Add event listener for creating organization tables
+      document
+        .getElementById("createTablesBtn")
+        .addEventListener("click", function () {
+          // Send AJAX request to create tables
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", "create-organization-tables.php", true);
+          xhr.setRequestHeader(
+            "Content-Type",
+            "application/x-www-form-urlencoded"
+          );
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+              if (xhr.status === 200) {
+                // Display response from PHP script
+                alert(xhr.responseText);
+              } else {
+                // Request failed
+                console.error("Error:", xhr.statusText);
+              }
+            }
+          };
+          xhr.send();
+        });
     })
     .catch((error) => console.error("Error loading home:", error));
 }
@@ -205,7 +230,7 @@ function initializeOrganizationManagement() {
         if (xhr.status === 200) {
           // Request was successful
           console.log(xhr.responseText);
-          // Display approval success modal
+          // Display approval success alert
           displayApprovalSuccessAlert();
           // Reload organization data after approval
           loadOrganizationData();

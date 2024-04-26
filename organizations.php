@@ -40,6 +40,7 @@ $conn->close();
         <tr>
           <th>Number</th>
           <th>Organization Name</th>
+          <th>Link</th> <!-- New column for the link -->
         </tr>
       </thead>
       <tbody>
@@ -53,16 +54,20 @@ $conn->close();
             // Check if 'adminid' key exists
             $adminid = isset($row['adminid']) ? $row['adminid'] : ''; // Default value if key is undefined
 
+            // Generate the URL for the organization's landing page
+            $url = "organization-landing-page.php?orgName={$row['orgName']}&address={$row['address']}&adminid={$adminid}";
+
             // Output each organization as a table row
             echo "<tr>";
             echo "<td>{$counter}</td>"; // Number column
-            echo "<td><a href='organization-landing-page.php?orgName={$row['orgName']}&address={$row['address']}&adminid={$adminid}'>{$row['orgName']}</a></td>"; // Name column
+            echo "<td>{$row['orgName']}</td>"; // Name column
+            echo "<td><a href='{$url}'>{$url}</a></td>"; // Link column with the generated hyperlink
             echo "</tr>";
             // Increment counter
             $counter++;
           }
         } else {
-          echo "<tr><td colspan='2'>0 results</td></tr>";
+          echo "<tr><td colspan='3'>0 results</td></tr>"; // Colspan set to 3 to span all columns
         }
         ?>
       </tbody>

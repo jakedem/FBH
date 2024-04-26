@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if the user was found
     if ($result->num_rows == 1) {
       // User found, do something (e.g., redirect to a dashboard)
-      header("Location: https://www.google.com");
+      header("Location: success.php");
       exit();
     } else {
       // User not found, display error message

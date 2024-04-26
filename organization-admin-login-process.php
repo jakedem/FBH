@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Check if there is a row with matching credentials
   if ($result->num_rows == 1) {
     // Redirect the user to index.html if login is successful
-    header("Location: index.html");
+    header("Location: success.php");
     exit(); // Stop further execution
   } else {
     // Redirect the user back to the login page with an error message

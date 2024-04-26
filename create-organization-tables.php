@@ -17,7 +17,9 @@ if ($conn->connect_error) {
 $sql = "SELECT orgId, orgName FROM Organizations WHERE approval_status IS NOT NULL AND approval_status != ''";
 $result = $conn->query($sql);
 
+// Check if any organization with approval status not null or empty exists
 if ($result->num_rows > 0) {
+  $successMessage = ""; // Initialize an empty string for success message
   // Loop through each organization
   while ($row = $result->fetch_assoc()) {
     $orgId = $row["orgId"];
@@ -26,23 +28,26 @@ if ($result->num_rows > 0) {
     $tableName = "table_" . str_replace(' ', '_', $orgName) . "_$orgId";
     // Generate SQL query to create the table
     $sqlCreateTable = "CREATE TABLE IF NOT EXISTS $tableName (
-            userId INT AUTO_INCREMENT PRIMARY KEY,
-            fullName VARCHAR(255) NOT NULL,
-            email VARCHAR(255) NOT NULL,
-            password VARCHAR(255) NOT NULL,
-            orgId INT,
-            FOREIGN KEY (orgId) REFERENCES Organizations(orgId)
-        )";
+              userId INT AUTO_INCREMENT PRIMARY KEY,
+              fullName VARCHAR(255) NOT NULL,
+              email VARCHAR(255) NOT NULL,
+              password VARCHAR(255) NOT NULL,
+              orgId INT,
+              FOREIGN KEY (orgId) REFERENCES Organizations(orgId)
+          )";
     // Execute the SQL query to create the table
     if ($conn->query($sqlCreateTable) === TRUE) {
-      echo "Table $tableName created successfully<br>";
+      // Store the success message
+      $successMessage = "Tables created successfully";
     } else {
-      echo "Error creating table: " . $conn->error;
+      // Handle error if table creation fails
+      $errorMessage = "Error creating table: " . $conn->error;
+      // You can choose to handle this error differently if needed
+      echo $errorMessage;
     }
   }
+  // Output the success message after the loop
+  echo $successMessage;
 } else {
   echo "No organizations found with approval status not null or empty";
 }
-
-// Close the database connection
-$conn->close();
