@@ -2,6 +2,8 @@
 $orgName = isset($_GET['orgName']) ? $_GET['orgName'] : 'Organization';
 ?>
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +22,9 @@ $orgName = isset($_GET['orgName']) ? $_GET['orgName'] : 'Organization';
   <main>
     <div class="signup-container">
       <h2><?php echo $orgName; ?> User Sign Up</h2>
-      <form action="signup_process.php" method="post">
+      <form action="organization-signup-process.php?orgName=<?php echo urlencode($orgName); ?>" method="post">
+        <!-- Include the organization name as a hidden input field -->
+        <input type="hidden" name="orgName" value="<?php echo $orgName; ?>">
         <label for="fullname">Full Name:</label>
         <input type="text" id="fullname" name="fullname" required>
         <br><br>
@@ -35,6 +39,7 @@ $orgName = isset($_GET['orgName']) ? $_GET['orgName'] : 'Organization';
         <br><br>
         <input type="submit" value="Sign Up">
       </form>
+
     </div>
     <br>
     <hr>

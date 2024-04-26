@@ -14,13 +14,15 @@ $orgName = isset($_GET['orgName']) ? $_GET['orgName'] : 'Organization';
 
 <body>
   <header>
-    <!-- link to go  back to home to be added later -->
+    <!-- link to go back to home to be added later -->
   </header>
 
   <main>
     <div class="login-container">
       <h2><?php echo $orgName; ?> User Login</h2>
-      <form action="login_process.php" method="post">
+      <form action="organization-login-process.php" method="post">
+        <!-- Include the organization name as a hidden input field -->
+        <input type="hidden" name="orgName" value="<?php echo $orgName; ?>">
         <label for="username">Email:</label>
         <input type="text" id="username" name="username" required>
         <br><br>
@@ -39,7 +41,7 @@ $orgName = isset($_GET['orgName']) ? $_GET['orgName'] : 'Organization';
   </main>
 
   <footer>
-    <p>&copy; <?php echo date("Y"); ?> Your Organization</p>
+    <p>&copy; <?php echo date("Y"); ?> Feedback Hub360</p>
   </footer>
 </body>
 

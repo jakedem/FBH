@@ -20,7 +20,7 @@ $orgName = isset($_GET['orgName']) ? $_GET['orgName'] : 'Organization';
   <main>
     <div class="login-container">
       <h2><?php echo $orgName; ?> Admin Login</h2>
-      <form action="login_process.php" method="post">
+      <form action="organization-admin-login-process.php" method="post">
         <label for="username">Email:</label>
         <input type="text" id="username" name="username" required>
         <br><br>
@@ -37,7 +37,7 @@ $orgName = isset($_GET['orgName']) ? $_GET['orgName'] : 'Organization';
   </main>
 
   <footer>
-    <p>&copy; <?php echo date("Y"); ?> Your Organization</p>
+    <p>&copy; <?php echo date("Y"); ?> Feedback Hub360</p>
   </footer>
 </body>
 
