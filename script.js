@@ -42,6 +42,16 @@ function loadManageOrganization() {
     );
 }
 
+function loadOrganizationsPage() {
+  fetch("organizations.php")
+    .then((response) => response.text())
+    .then((html) => {
+      document.querySelector(".main-section").innerHTML = html;
+    })
+    .catch((error) =>
+      console.error("Error loading organizations page:", error)
+    );
+}
 function openOrganizationsPage() {
   // Open the organizations.php page in a new tab
   window.open("organizations.php", "_blank");

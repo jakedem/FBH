@@ -28,33 +28,45 @@ $conn->close();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Organizations</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="./styles/index.css" />
+  <link rel="stylesheet" href="./styles/organizations.css" />
 </head>
 
 <body>
-  <h2>Organizations</h2>
+  <div class='title-text'>Organizations</div>
   <div class="container">
-    <div class="organizations">
-      <?php
-      // Check if there are any organizations
-      if ($result->num_rows > 0) {
-        // Initialize counter
-        $counter = 1;
-        // Output data of each row
-        while ($row = $result->fetch_assoc()) {
-          // Check if 'adminid' key exists
-          $adminid = isset($row['adminid']) ? $row['adminid'] : ''; // Default value if key is undefined
+    <table class="organizations-table">
+      <thead>
+        <tr>
+          <th>Number</th>
+          <th>Organization Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+        // Check if there are any organizations
+        if ($result->num_rows > 0) {
+          // Initialize counter
+          $counter = 1;
+          // Output data of each row
+          while ($row = $result->fetch_assoc()) {
+            // Check if 'adminid' key exists
+            $adminid = isset($row['adminid']) ? $row['adminid'] : ''; // Default value if key is undefined
 
-          // Generate link for each organization name with numbering
-          echo "<div>{$counter}. <a href='organization-details.php?orgName={$row['orgName']}&address={$row['address']}&adminid={$adminid}'>{$row['orgName']}</a></div>";
-          // Increment counter
-          $counter++;
+            // Output each organization as a table row
+            echo "<tr>";
+            echo "<td>{$counter}</td>"; // Number column
+            echo "<td><a href='organization-landing-page.php?orgName={$row['orgName']}&address={$row['address']}&adminid={$adminid}'>{$row['orgName']}</a></td>"; // Name column
+            echo "</tr>";
+            // Increment counter
+            $counter++;
+          }
+        } else {
+          echo "<tr><td colspan='2'>0 results</td></tr>";
         }
-      } else {
-        echo "0 results";
-      }
-      ?>
-    </div>
+        ?>
+      </tbody>
+    </table>
   </div>
   <script src="script.js"></script>
 </body>
