@@ -15,16 +15,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     die("Connection failed: " . $conn->connect_error);
   }
 
-  // Prepare SQL statement to insert organization data
-  $sqlOrg = "INSERT INTO Organizations (orgName, orgType, address) VALUES (?, ?, ?)";
-  $stmtOrg = $conn->prepare($sqlOrg);
-  $stmtOrg->bind_param("sss", $orgName, $orgType, $address);
-
-  // Prepare SQL statement to insert admin data
-  $sqlAdmin = "INSERT INTO Admins (orgId, adminName, adminEmail, adminPassword) VALUES (?, ?, ?, ?)";
-  $stmtAdmin = $conn->prepare($sqlAdmin);
-  $stmtAdmin->bind_param("ssss", $orgId, $adminName, $adminEmail, $adminPassword);
-
   // Assign form data to variables
   $orgName = $_POST["orgName"];
   $orgType = $_POST["orgType"];
@@ -42,6 +32,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   } else {
     $orgId = str_pad((intval($maxOrgId) + 1), 5, "0", STR_PAD_LEFT);
   }
+
+  // Prepare SQL statement to insert organization data
+  $sqlOrg = "INSERT INTO Organizations (orgId, orgName, orgType, address) VALUES (?, ?, ?, ?)";
+  $stmtOrg = $conn->prepare($sqlOrg);
+  $stmtOrg->bind_param("ssss", $orgId, $orgName, $orgType, $address);
+
+  // Prepare SQL statement to insert admin data
+  $sqlAdmin = "INSERT INTO Admins (orgId, adminName, adminEmail, adminPassword) VALUES (?, ?, ?, ?)";
+  $stmtAdmin = $conn->prepare($sqlAdmin);
+  $stmtAdmin->bind_param("ssss", $orgId, $adminName, $adminEmail, $adminPassword);
 
   // Execute the prepared statements
   if ($stmtOrg->execute() && $stmtAdmin->execute()) {
