@@ -1,5 +1,6 @@
 <?php
 $orgName = isset($_GET['orgName']) ? $_GET['orgName'] : 'Organization';
+$orgId = isset($_GET['orgId']) ? $_GET['orgId'] : ''; // Retrieve orgId from the URL
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +20,7 @@ $orgName = isset($_GET['orgName']) ? $_GET['orgName'] : 'Organization';
 
   <main>
     <div class="signup-container">
-      <h2><?php echo $orgName; ?> User Sign Up</h2>
+      <h2><?php echo $orgName . $orgId; ?> User Sign Up</h2>
       <form action="organization-signup-process.php?orgName=<?php echo urlencode($orgName); ?>" method="post">
         <!-- Include the organization name as a hidden input field -->
         <input type="hidden" name="orgName" value="<?php echo $orgName; ?>">

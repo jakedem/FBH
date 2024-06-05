@@ -1,4 +1,6 @@
 <?php
+session_start(); // Start the session
+
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Database connection parameters
@@ -17,56 +19,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   // Retrieve organization name from the form submission
   $orgName = isset($_POST['orgName']) ? strtolower($_POST['orgName']) : 'organization';
+  $orgId = isset($_POST['orgId']) ? $_POST['orgId'] : '';
 
+  // Retrieve user details from the form
+  $email = $_POST['username'];
+  $password = $_POST['password'];
 
-  // Find the corresponding organization ID in the database
-  $sql = "SELECT orgId FROM Organizations WHERE orgName = ?";
+  // Determine the table name based on the organization name and ID
+  $tableName = str_replace(' ', '_', $orgName) . "_$orgId";
+
+  // Check if the user exists in the organization's table
+  $sql = "SELECT userId, fullname FROM $tableName WHERE email = ? AND password = ?";
   $stmt = $conn->prepare($sql);
-  $stmt->bind_param("s", $orgName);
+  $stmt->bind_param("ss", $email, $password);
   $stmt->execute();
   $result = $stmt->get_result();
 
-  // Check if the SQL query was successful
-  if (!$result) {
-    die("Error executing SQL query: " . $conn->error);
-  }
-
-  // Check if any rows were returned
+  // Check if the user was found
   if ($result->num_rows == 1) {
-    // Fetch the row
-    $row = $result->fetch_assoc();
-    $orgId = $row['orgId'];
+    // User found, fetch user data
+    $user = $result->fetch_assoc();
+    $fullname = $user['fullname'];
+    $userId = $user['userId'];
 
-    // Determine the table name based on the organization name and ID
-    $tableName = "table_" . str_replace(' ', '_', $orgName) . "_$orgId";
+    // Store the user's name, ID, orgName, and orgId in the session
+    $_SESSION['userName'] = $fullname;
+    $_SESSION['userId'] = $userId;
+    $_SESSION['orgName'] = $orgName;
+    $_SESSION['orgId'] = $orgId;
 
-    // Retrieve user details from the form
-    $email = $_POST['username'];
-    $password = $_POST['password'];
-
-    // Check if the user exists in the organization's table
-    $sql = "SELECT * FROM $tableName WHERE email = ? AND password = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ss", $email, $password);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    // Check if the user was found
-    if ($result->num_rows == 1) {
-      // User found, do something (e.g., redirect to a dashboard)
-      header("Location: success.php");
-      exit();
-    } else {
-      // User not found, display error message
-      echo "Invalid username or password.";
-    }
-
-    // Close the prepared statement and database connection
-    $stmt->close();
-    $conn->close();
-  } else {
-    // Handle the case where organization ID retrieval fails
-    echo "Organization not found or multiple organizations found with the same name.";
+    // Redirect to the user dashboard
+    header("Location: organization-user.php");
     exit();
+  } else {
+    // User not found, display error message
+    echo "Invalid username or password.";
   }
+
+  // Close the prepared statement and database connection
+  $stmt->close();
+  $conn->close();
 }

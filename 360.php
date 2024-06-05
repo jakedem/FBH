@@ -11,21 +11,23 @@
 <body>
   <header>
     <?php
-    // Check if organization name is provided
+    // Check if organization name and ID are provided
     $orgName = isset($_GET['orgName']) ? $_GET['orgName'] : 'Organization';
+    $orgId = isset($_GET['orgId']) ? $_GET['orgId'] : '';
     // Display welcome message with organization name
     echo "<h1>Welcome {$orgName} to Feedback Hub 360</h1>";
     ?>
+    <!-- Echo Organization Name and ID -->
+    <p>Organization Name: <?php echo $orgName; ?></p>
+    <p>Organization ID: <?php echo $orgId; ?></p>
     <nav>
       <!-- Your navigation links go here -->
       <ul>
-        <li><a href="home.php">Home</a></li>
-        <li><a href="about.php">About</a></li>
-        <li><a href="contact.php">Contact</a></li>
-        <li><a href="organization-signup.php?orgName=<?php echo urlencode($orgName); ?>">Sign Up</a></li>
-
-        <li><a href="organization-login.php?orgName=<?php echo urlencode($orgName); ?>">Log In</a></li>
-
+        <li><a href="home.php?orgName=<?php echo urlencode($orgName); ?>&orgId=<?php echo $orgId; ?>">Home</a></li>
+        <li><a href="about.php?orgName=<?php echo urlencode($orgName); ?>&orgId=<?php echo $orgId; ?>">About</a></li>
+        <li><a href="contact.php?orgName=<?php echo urlencode($orgName); ?>&orgId=<?php echo $orgId; ?>">Contact</a></li>
+        <li><a href="organization-signup.php?orgName=<?php echo urlencode($orgName); ?>&orgId=<?php echo $orgId; ?>">Sign Up</a></li>
+        <li><a href="organization-login.php?orgName=<?php echo urlencode($orgName); ?>&orgId=<?php echo $orgId; ?>">Log In</a></li>
       </ul>
     </nav>
   </header>
@@ -45,9 +47,8 @@
     </div>
   </main>
 
-
   <footer>
-    <p>&copy; <?php echo date("Y"); ?> Your Organization</p>
+    <p>&copy; <?php echo date("Y"); ?> Feedback Hub360</p>
   </footer>
 </body>
 

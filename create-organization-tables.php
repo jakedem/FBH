@@ -25,9 +25,9 @@ if ($result->num_rows > 0) {
     $orgId = $row["orgId"];
     $orgName = $row["orgName"];
     // Generate table name for the organization
-    $tableName = "table_" . str_replace(' ', '_', $orgName) . "_$orgId";
-    // Generate SQL query to create the table
-    $sqlCreateTable = "CREATE TABLE IF NOT EXISTS $tableName (
+    $tableName = str_replace(' ', '_', $orgName) . "_$orgId";
+    // Generate SQL query to create the user table
+    $sqlCreateUserTable = "CREATE TABLE IF NOT EXISTS $tableName (
               userId INT AUTO_INCREMENT PRIMARY KEY,
               fullName VARCHAR(255) NOT NULL,
               email VARCHAR(255) NOT NULL,
@@ -35,13 +35,33 @@ if ($result->num_rows > 0) {
               orgId INT,
               FOREIGN KEY (orgId) REFERENCES Organizations(orgId)
           )";
-    // Execute the SQL query to create the table
-    if ($conn->query($sqlCreateTable) === TRUE) {
-      // Store the success message
-      $successMessage = "Tables created successfully";
+    // Execute the SQL query to create the user table
+    if ($conn->query($sqlCreateUserTable) === TRUE) {
+      // Generate feedback table name
+      $feedbackTableName = str_replace(' ', '_', $orgName) . "_" . $orgId . "_fb";
+      // Generate SQL query to create the feedback table
+      $sqlCreateFeedbackTable = "CREATE TABLE IF NOT EXISTS $feedbackTableName (
+  feedbackId INT AUTO_INCREMENT PRIMARY KEY,
+  userId INT NOT NULL,
+  feedbackType VARCHAR(255) NOT NULL,
+  feedbackText TEXT NOT NULL,
+  submissionTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (userId) REFERENCES $tableName(userId)
+)";
+
+      // Execute the SQL query to create the feedback table
+      if ($conn->query($sqlCreateFeedbackTable) === TRUE) {
+        // Store the success message
+        $successMessage = "Organization Schema created successfully";
+      } else {
+        // Handle error if feedback table creation fails
+        $errorMessage = "Error creating feedback table: " . $conn->error;
+        // You can choose to handle this error differently if needed
+        echo $errorMessage;
+      }
     } else {
-      // Handle error if table creation fails
-      $errorMessage = "Error creating table: " . $conn->error;
+      // Handle error if user table creation fails
+      $errorMessage = "Error creating user table: " . $conn->error;
       // You can choose to handle this error differently if needed
       echo $errorMessage;
     }

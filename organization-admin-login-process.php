@@ -1,4 +1,6 @@
 <?php
+session_start(); // Start the session
+
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Database connection parameters
@@ -20,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $password = $_POST["password"];
 
   // Prepare SQL statement to select admin from database
-  $sql = "SELECT * FROM Admins WHERE adminEmail = ? AND adminPassword = ?";
+  $sql = "SELECT adminName FROM Admins WHERE adminEmail = ? AND adminPassword = ?";
   $stmt = $conn->prepare($sql);
   $stmt->bind_param("ss", $username, $password);
 
@@ -32,8 +34,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   // Check if there is a row with matching credentials
   if ($result->num_rows == 1) {
-    // Redirect the user to index.html if login is successful
-    header("Location: success.php");
+    // Fetch the admin name
+    $row = $result->fetch_assoc();
+    $adminName = $row['adminName'];
+
+    // Store the admin's name in the session
+    $_SESSION['adminName'] = $adminName;
+
+    // Redirect the user to the admin dashboard if login is successful
+    header("Location: organization-admin-dashboard.php");
     exit(); // Stop further execution
   } else {
     // Redirect the user back to the login page with an error message

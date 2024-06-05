@@ -1,5 +1,5 @@
 function loadHome() {
-  fetch("home.html")
+  fetch("home.php")
     .then((response) => response.text())
     .then((html) => {
       document.querySelector(".main-section").innerHTML = html;
@@ -46,7 +46,7 @@ function loadPendingOrganization() {
 }
 
 function loadAddOrganization() {
-  fetch("add-organization.html")
+  fetch("add-organization.php")
     .then((response) => response.text())
     .then((html) => {
       document.querySelector(".main-section").innerHTML = html;

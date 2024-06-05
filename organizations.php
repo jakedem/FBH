@@ -17,8 +17,6 @@ if ($conn->connect_error) {
 $sql = "SELECT * FROM organizations WHERE approval_status IS NOT NULL AND approval_status != ''";
 $result = $conn->query($sql);
 
-// Close connection
-$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +31,7 @@ $conn->close();
 </head>
 
 <body>
-  <div class='title-text'>Organizations</div>
+  <div class='title-text'>Organizations </div>
   <div class="container">
     <table class="organizations-table">
       <thead>
@@ -51,11 +49,8 @@ $conn->close();
           $counter = 1;
           // Output data of each row
           while ($row = $result->fetch_assoc()) {
-            // Check if 'adminid' key exists
-            $adminid = isset($row['adminid']) ? $row['adminid'] : ''; // Default value if key is undefined
-
             // Generate the URL for the organization's landing page
-            $url = "organization-landing-page.php?orgName={$row['orgName']}&address={$row['address']}&adminid={$adminid}";
+            $url = "360.php?orgName={$row['orgName']}&orgId={$row['orgId']}";
 
             // Output each organization as a table row
             echo "<tr>";

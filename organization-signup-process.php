@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $orgId = $row['orgId'];
 
     // Determine the table name based on the organization name and ID
-    $tableName = "table_" . str_replace(' ', '_', $orgName) . "_$orgId";
+    $tableName = str_replace(' ', '_', $orgName) . "_$orgId";
 
     // Retrieve user details from the form
     $fullname = $_POST['fullname'];

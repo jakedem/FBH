@@ -1,5 +1,6 @@
 <?php
 $orgName = isset($_GET['orgName']) ? $_GET['orgName'] : 'Organization';
+$orgId = isset($_GET['orgId']) ? $_GET['orgId'] : ''; // Retrieve orgId from the URL
 ?>
 
 <!DOCTYPE html>
@@ -19,10 +20,11 @@ $orgName = isset($_GET['orgName']) ? $_GET['orgName'] : 'Organization';
 
   <main>
     <div class="login-container">
-      <h2><?php echo $orgName; ?> User Login</h2>
+      <h2><?php echo $orgName . $orgId; ?> User Login</h2>
       <form action="organization-login-process.php" method="post">
-        <!-- Include the organization name as a hidden input field -->
+        <!-- Include the organization name and orgId as hidden input fields -->
         <input type="hidden" name="orgName" value="<?php echo $orgName; ?>">
+        <input type="hidden" name="orgId" value="<?php echo $orgId; ?>">
         <label for="username">Email:</label>
         <input type="text" id="username" name="username" required>
         <br><br>
@@ -34,7 +36,7 @@ $orgName = isset($_GET['orgName']) ? $_GET['orgName'] : 'Organization';
       <br>
       <a href="forgot_password.php">Forgot Password?</a><br>
       <br>
-      Switch to <a href="organization-admin-login.php?orgName=<?php echo urlencode($orgName); ?>">Admin Login</a>
+      Switch to <a href="organization-admin-login.php?orgName=<?php echo urlencode($orgName); ?>&orgId=<?php echo $orgId; ?>">Admin Login</a>
     </div>
     <br>
     <hr>
