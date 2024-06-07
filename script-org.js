@@ -2,43 +2,110 @@ function loadHome() {
   fetch("home-org.php")
     .then((response) => response.text())
     .then((html) => {
+      // Update the main section with the loaded home content
       document.querySelector(".main-section").innerHTML = html;
 
-      // Add event listener for creating organization tables
-      document
-        .getElementById("createTablesBtn")
-        .addEventListener("click", function () {
-          // Send AJAX request to create tables
-          var xhr = new XMLHttpRequest();
-          xhr.open("POST", "create-organization-tables.php", true);
-          xhr.setRequestHeader(
-            "Content-Type",
-            "application/x-www-form-urlencoded"
-          );
-          xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-              if (xhr.status === 200) {
-                // Display response from PHP script
-                alert(xhr.responseText);
-              } else {
-                // Request failed
-                console.error("Error:", xhr.statusText);
-              }
+      // After loading the home content, fetch the feedback count
+      fetch("feedback-count.php")
+        .then((response) => response.json())
+        .then((data) => {
+          // Check if the response contains the feedback count
+          if (data.feedbackCount !== undefined) {
+            // Update the content of the element with the feedback count
+            const feedbackCountElement =
+              document.getElementById("feedback-count");
+            if (feedbackCountElement) {
+              feedbackCountElement.textContent = data.feedbackCount;
             }
-          };
-          xhr.send();
-        });
+          } else {
+            console.error("Feedback count not found in response");
+          }
+        })
+        .catch((error) =>
+          console.error("Error loading feedback count:", error)
+        );
+
+      // After loading the home content, fetch the anonymous feedback count
+      fetch("anonymous-feedback-count.php")
+        .then((response) => response.json())
+        .then((data) => {
+          // Check if the response contains the anonymous feedback count
+          if (data.anonymousFeedbackCount !== undefined) {
+            // Update the content of the element with the anonymous feedback count
+            const anonymousFeedbackCountElement = document.getElementById(
+              "anonymous-feedback-count"
+            );
+            if (anonymousFeedbackCountElement) {
+              anonymousFeedbackCountElement.textContent =
+                data.anonymousFeedbackCount;
+            }
+          } else {
+            console.error("Anonymous feedback count not found in response");
+          }
+        })
+        .catch((error) =>
+          console.error("Error loading anonymous feedback count:", error)
+        );
+
+      // After loading the home content, fetch the user count
+      fetch("user-count.php")
+        .then((response) => response.json())
+        .then((data) => {
+          // Check if the response contains the user count
+          if (data.userCount !== undefined) {
+            // Update the content of the element with the user count
+            const userCountElement = document.getElementById("user-count");
+            if (userCountElement) {
+              userCountElement.textContent = data.userCount;
+            }
+          } else {
+            console.error("User count not found in response");
+          }
+        })
+        .catch((error) => console.error("Error loading user count:", error));
+
+      // Add event listener to "Total Feedback" button
+      const totalFeedbackButton = document.querySelector(".footer-button");
+      totalFeedbackButton.addEventListener("click", loadFeedback);
+
+      // Add event listener to "Anonymous Feedback" button
+      const totalAnonymousFeedbackButton =
+        document.querySelector(".footer-button");
+      totalAnonymousFeedbackButton.addEventListener("click", loadFeedback);
+
+      // Add event listener to "Total Feedback" button
+      const totalUserskButton = document.querySelector(".footer-button");
+      totalUserskButton.addEventListener("click", loadFeedback);
     })
+
     .catch((error) => console.error("Error loading home:", error));
 }
 
-function loadFeedbacKOverview() {
-  fetch("add-organization.php")
+function loadFeedback() {
+  fetch("get-feedback.php")
     .then((response) => response.text())
     .then((html) => {
       document.querySelector(".main-section").innerHTML = html;
     })
-    .catch((error) => console.error("Error loading feedback overview:", error));
+    .catch((error) => console.error("Error loading feedback:", error));
+}
+
+function loadAnonymousFeedback() {
+  fetch("get-anonymous-feedback.php")
+    .then((response) => response.text())
+    .then((html) => {
+      document.querySelector(".main-section").innerHTML = html;
+    })
+    .catch((error) => console.error("Error loading feedback:", error));
+}
+
+function loadUsers() {
+  fetch("get-users.php")
+    .then((response) => response.text())
+    .then((html) => {
+      document.querySelector(".main-section").innerHTML = html;
+    })
+    .catch((error) => console.error("Error loading users:", error));
 }
 
 function loadManageOrganization() {

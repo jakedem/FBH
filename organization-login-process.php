@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     die("Connection failed: " . $conn->connect_error);
   }
 
-  // Retrieve organization name from the form submission
+  // Retrieve organization name and ID from the form submission
   $orgName = isset($_POST['orgName']) ? strtolower($_POST['orgName']) : 'organization';
   $orgId = isset($_POST['orgId']) ? $_POST['orgId'] : '';
 
@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $tableName = str_replace(' ', '_', $orgName) . "_$orgId";
 
   // Check if the user exists in the organization's table
-  $sql = "SELECT userId, fullname FROM $tableName WHERE email = ? AND password = ?";
+  $sql = "SELECT userId, fullName FROM $tableName WHERE email = ? AND password = ?";
   $stmt = $conn->prepare($sql);
   $stmt->bind_param("ss", $email, $password);
   $stmt->execute();
@@ -39,11 +39,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if ($result->num_rows == 1) {
     // User found, fetch user data
     $user = $result->fetch_assoc();
-    $fullname = $user['fullname'];
+    $fullName = $user['fullName'];
     $userId = $user['userId'];
 
     // Store the user's name, ID, orgName, and orgId in the session
-    $_SESSION['userName'] = $fullname;
+    $_SESSION['userName'] = $fullName;
     $_SESSION['userId'] = $userId;
     $_SESSION['orgName'] = $orgName;
     $_SESSION['orgId'] = $orgId;

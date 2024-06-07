@@ -121,3 +121,7 @@
 .organization-list button.terminate:hover {
   background-color: #9b0909; 
 }
+
+tr:hover {
+  background-color: #f9f9f971; /* Lighter background color on hover */
+}

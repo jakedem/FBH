@@ -41,13 +41,16 @@ if ($result->num_rows > 0) {
       $feedbackTableName = str_replace(' ', '_', $orgName) . "_" . $orgId . "_fb";
       // Generate SQL query to create the feedback table
       $sqlCreateFeedbackTable = "CREATE TABLE IF NOT EXISTS $feedbackTableName (
-  feedbackId INT AUTO_INCREMENT PRIMARY KEY,
-  userId INT NOT NULL,
-  feedbackType VARCHAR(255) NOT NULL,
-  feedbackText TEXT NOT NULL,
-  submissionTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (userId) REFERENCES $tableName(userId)
-)";
+                feedbackId INT AUTO_INCREMENT PRIMARY KEY,
+                userId INT NOT NULL,
+                feedbackType VARCHAR(255) NOT NULL,
+                feedbackText TEXT NOT NULL,
+                anonymity BOOLEAN NOT NULL DEFAULT 0,
+                submissionTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                orgId INT NOT NULL,
+                FOREIGN KEY (userId) REFERENCES $tableName(userId),
+                FOREIGN KEY (orgId) REFERENCES Organizations(orgId)
+            )";
 
       // Execute the SQL query to create the feedback table
       if ($conn->query($sqlCreateFeedbackTable) === TRUE) {

@@ -16,15 +16,15 @@
       <div class="top-card">
         <div class="card">
           <div class="card-header">
-            <img src="./icons/user.svg" alt="User Icon" class="user-icon" />
+            <img src="./icons/feedback3.svg" alt="User Icon" class="user-icon" />
             <div class="user-count">
-              <p class="card-number">3000</p>
+              <p id="feedback-count" class="card-number"></p>
             </div>
           </div>
 
           <div class="card-footer">
-            <button class="footer-button" onclick="loadPendingOrganization()">
-              Recent Feedbacks
+            <button class="footer-button" onclick="loadFeedback()">
+              Total Feedback
             </button>
           </div>
         </div>
@@ -32,16 +32,14 @@
       <div class="top-card">
         <div class="card">
           <div class="card-header">
-            <img src="./icons/user.svg" alt="User Icon" class="user-icon" />
+            <img src="./icons/anonymous.svg" alt="User Icon" class="user-icon" />
             <div class="user-count">
-              <p class="card-number">3000</p>
+              <p id='anonymous-feedback-count' class="card-number"></p>
             </div>
           </div>
           <div class="card-footer">
-            <!-- <button class="footer-button" onclick="openOrganizationsPage()"> Organization Links</button>-->
-
-            <button class="footer-button" onclick="loadOrganizationsPage()">
-              Pending Actions
+            <button class="footer-button" onclick="loadAnonymousFeedback()">
+              Anonymous Feedback
             </button>
           </div>
         </div>
@@ -52,11 +50,11 @@
           <div class="card-header">
             <img src="./icons/user.svg" alt="User Icon" class="user-icon" />
             <div class="user-count">
-              <p class="card-number">3000</p>
+              <p id="user-count" class="card-number"></p>
             </div>
           </div>
           <div class="card-footer">
-            <button id="createTablesBtn" class="footer-button">
+            <button id="createTablesBtn" class="footer-button" onclick="loadUsers()">
               Total Users
             </button>
           </div>
@@ -68,16 +66,16 @@
       <div class="bottom-card">
         <div class="card">
           <h2>Card 4</h2>
-          <p>Top Feedback Categories
+          <p>a bar chart of the feedback categories
           </p>
         </div>
       </div>
-      <div class="bottom-card">
+      <!-- <div class="bottom-card">
         <div class="card">
           <h2>Card 5</h2>
           <p>Security status and alerts</p>
         </div>
-      </div>
+      </div> -->
     </div>
   </main>
 

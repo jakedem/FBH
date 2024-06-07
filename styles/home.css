@@ -8,8 +8,8 @@
 }
 
 .top-card {
-  /* background-color: lightblue; */
-  height: 250px;
+  width: 300px; /* Fixed width */
+  height: 250px; /* Fixed height */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,10 +34,12 @@
 
 .card {
   background-color: #ffffff; /* Background color */
-  border-radius: none; /* Rounded corners */
+  border-radius: 5px; /* Rounded corners */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
   padding: 20px; /* Padding inside the card */
   margin-bottom: 0px; /* Margin to separate cards */
+  width: 200px; /* Fixed width */
+  height: 165px
 }
 
 /* Hover effect */
@@ -79,8 +81,8 @@
 
 .card-footer {
   text-align: center;
-  padding: 0;
-  margin: 0;
+  padding: 8px;
+  margin: 0px;
 }
 
 .footer-button {

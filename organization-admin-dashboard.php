@@ -9,6 +9,8 @@ if (!isset($_SESSION['adminName'])) {
 }
 
 $adminName = $_SESSION['adminName'];
+$orgName = $_SESSION['orgName'];
+$orgId = $_SESSION['orgId'];
 ?>
 
 <!DOCTYPE html>
@@ -31,10 +33,22 @@ $adminName = $_SESSION['adminName'];
       align-items: center;
       padding: 10px;
       background-color: #f4f4f4;
+      color: black;
     }
 
     .header-text {
       margin: 0;
+    }
+
+    .admin-info {
+      display: flex;
+      align-items: center;
+    }
+
+    .admin-name,
+    .org-info {
+      margin-right: 20px;
+      color: black;
     }
 
     .admin-name {
@@ -53,13 +67,18 @@ $adminName = $_SESSION['adminName'];
 
 <body>
   <div class="header">
-    <img src="./icons/list.svg" alt="Menu Icon" class="menu-icon" />
-    <h3 class="header-text">Admin Dashboard</h3>
+    <div style="display: flex; align-items: center;">
+      <img src="./icons/list.svg" alt="Menu Icon" class="menu-icon" />
+      <h3 class="header-text">Admin Dashboard</h3>
+    </div>
 
-    <div class="admin-name"><?php echo htmlspecialchars($adminName); ?></div>
+    <div class="admin-info">
+      <div class="org-info">Organization: <?php echo htmlspecialchars($orgName); ?> (ID: <?php echo htmlspecialchars($orgId); ?>)</div>
+      <div class="admin-name"><?php echo htmlspecialchars($adminName); ?></div>
+    </div>
   </div>
 
-  <div class="sidebar" id='sidebar-org'>
+  <div class="sidebar">
     <div class="side-links">
       <a href="#" onclick="loadHome()">
         <img src="./icons/home.svg" alt="Home Icon" class="icon" /> Home

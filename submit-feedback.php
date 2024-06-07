@@ -35,6 +35,11 @@ $orgName = isset($_SESSION['orgName']) ? $_SESSION['orgName'] : 'Organization'; 
         <option value="Safety">Safety and Security</option>
       </select>
       <textarea name="feedbackText" id="feedbackText" rows="5" placeholder="Enter your feedback here"></textarea>
+
+      <label>
+        <input type="checkbox" name="anonymity" id="anonymity"> Submit Anonymously
+      </label>
+
       <button type="submit">Submit</button>
     </form>
   </div>

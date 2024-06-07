@@ -44,10 +44,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // Insert user details into the respective organization's table
-    $sql = "INSERT INTO $tableName (fullname, email, password) VALUES (?, ?, ?)";
+    // Insert user details into the respective organization's table, including orgId
+    $sql = "INSERT INTO $tableName (fullname, email, password, orgId) VALUES (?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sss", $fullname, $email, $password);
+    $stmt->bind_param("sssi", $fullname, $email, $password, $orgId);
 
     // Execute the prepared statement
     if ($stmt->execute()) {

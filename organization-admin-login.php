@@ -1,5 +1,6 @@
 <?php
 $orgName = isset($_GET['orgName']) ? $_GET['orgName'] : 'Organization';
+$orgId = isset($_GET['orgId']) ? $_GET['orgId'] : '';
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +22,8 @@ $orgName = isset($_GET['orgName']) ? $_GET['orgName'] : 'Organization';
     <div class="login-container">
       <h2><?php echo $orgName; ?> Admin Login</h2>
       <form action="organization-admin-login-process.php" method="post">
+        <input type="hidden" name="orgName" value="<?php echo htmlspecialchars($orgName); ?>">
+        <input type="hidden" name="orgId" value="<?php echo htmlspecialchars($orgId); ?>">
         <label for="username">Email:</label>
         <input type="text" id="username" name="username" required>
         <br><br>

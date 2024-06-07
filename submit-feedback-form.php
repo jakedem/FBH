@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -17,6 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Retrieve feedback data from form submission
   $feedbackType = $_POST['feedbackType'];
   $feedbackText = $_POST['feedbackText'];
+  $anonymity = isset($_POST['anonymity']) ? 1 : 0;
 
   // Get user ID from session
   $userId = $_SESSION['userId'];
@@ -37,11 +37,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   // Construct SQL query to insert feedback into database table
   $feedbackTableName = str_replace(' ', '_', $orgName) . "_" . $orgId . "_fb";
-  $sql = "INSERT INTO $feedbackTableName (userId, feedbackType, feedbackText) VALUES (?, ?, ?)";
+  $sql = "INSERT INTO $feedbackTableName (userId, feedbackType, feedbackText, anonymity, orgId) VALUES (?, ?, ?, ?, ?)";
 
   // Prepare and bind parameters
   $stmt = $conn->prepare($sql);
-  $stmt->bind_param("iss", $userId, $feedbackType, $feedbackText);
+  $stmt->bind_param("issii", $userId, $feedbackType, $feedbackText, $anonymity, $orgId);
 
   // Execute the prepared statement
   if ($stmt->execute() === TRUE) {

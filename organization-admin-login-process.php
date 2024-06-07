@@ -21,6 +21,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $username = $_POST["username"];
   $password = $_POST["password"];
 
+  // Retrieve organization name and ID from the form
+  $orgName = $_POST["orgName"];
+  $orgId = $_POST["orgId"];
+
+  // Store organization name and ID in the session
+  $_SESSION['orgName'] = $orgName;
+  $_SESSION['orgId'] = $orgId;
+
   // Prepare SQL statement to select admin from database
   $sql = "SELECT adminName FROM Admins WHERE adminEmail = ? AND adminPassword = ?";
   $stmt = $conn->prepare($sql);
