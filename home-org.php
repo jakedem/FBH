@@ -7,6 +7,7 @@
   <title>Home</title>
   <link rel="stylesheet" href="./styles/home.css" />
   <link rel="stylesheet" href="./styles/index.css" />
+  <!-- <link rel="stylesheet" href="./styles/barchart.css"> -->
 </head>
 
 <body>
@@ -21,7 +22,6 @@
               <p id="feedback-count" class="card-number"></p>
             </div>
           </div>
-
           <div class="card-footer">
             <button class="footer-button" onclick="loadFeedback()">
               Total Feedback
@@ -34,7 +34,7 @@
           <div class="card-header">
             <img src="./icons/anonymous.svg" alt="User Icon" class="user-icon" />
             <div class="user-count">
-              <p id='anonymous-feedback-count' class="card-number"></p>
+              <p id="anonymous-feedback-count" class="card-number"></p>
             </div>
           </div>
           <div class="card-footer">
@@ -62,24 +62,21 @@
       </div>
     </div>
 
-    <div class="bottom-cards">
-      <div class="bottom-card">
-        <div class="card">
-          <h2>Card 4</h2>
-          <p>a bar chart of the feedback categories
-          </p>
-        </div>
-      </div>
-      <!-- <div class="bottom-card">
-        <div class="card">
-          <h2>Card 5</h2>
-          <p>Security status and alerts</p>
-        </div>
-      </div> -->
+    <!-- New section for the bar chart -->
+    <div class="chart-container">
+      <canvas id="feedbackChart"></canvas>
     </div>
   </main>
 
+  <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
   <script src="sript-org.js"></script>
+
+  <script>
+    // Placeholder for the script to fetch data and render the chart
+  </script>
 </body>
 
 </html>

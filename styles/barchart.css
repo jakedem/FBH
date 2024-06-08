@@ -1,0 +1,43 @@
+/* Styles for the chart container */
+.chart-container {
+  position: relative;
+  width: 100%; /* Adjust width as needed */
+  margin: 0 auto;
+}
+
+/* Styles for the chart title */
+.chart-title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Styles for the chart canvas */
+#feedbackChart {
+  background-color: none; /* Background color for the chart */
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow effect */
+}
+
+
+/* Styles for the chart container */
+.chart-container {
+  display: flex;
+  justify-content: center; /* Center the chart horizontally */
+  align-items: center; /* Center the chart vertically */
+  width: 80%; /* Adjust width as needed */
+  height: 50vh; /* Adjust height as needed */
+  margin: 50px auto 0 auto; /* Add margin-top and center the container horizontally */
+}
+
+/* Styles for the chart canvas */
+#feedbackChart {
+  width: 100%; /* Make canvas fill the container horizontally */
+  height: 100%; /* Make canvas fill the container vertically */
+  max-width: 100%; /* Ensure canvas fills the container */
+  max-height: 100%; /* Ensure canvas fills the container */
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow effect */
+}
+

@@ -26,6 +26,7 @@ $orgId = $_SESSION['orgId'];
   <link rel="stylesheet" href="./styles/home.css" />
   <link rel="stylesheet" href="./styles/add-organization.css" />
   <link rel="stylesheet" href="./styles/manage-organization.css" />
+  <link rel="stylesheet" href="./styles/barchart.css">
   <style>
     .header {
       display: flex;
@@ -83,18 +84,18 @@ $orgId = $_SESSION['orgId'];
       <a href="#" onclick="loadHome()">
         <img src="./icons/home.svg" alt="Home Icon" class="icon" /> Home
       </a>
-      <a href="#" onclick="loadFeedbacKOverview()">
+      <a href="#" onclick="loadFeedback()">
         <img src="./icons/addorganization.svg" alt="Organizations Icon" class="icon" />
         Feedback Overview
       </a>
-      <a href="#" onclick="loadManageOrganization()">
+      <a href="#" onclick="loadUsers()">
         <img src="./icons/organization.svg" alt="Organizations Icon" class="icon" />
         User Management
       </a>
-      <a href="#" onclick="loadSystemSecurity()">
+      <!-- <a href="#" onclick="loadSystemSecurity()">
         <img src="./icons/security.svg" alt="Security Icon" class="icon" />
         Security & Monitoring
-      </a>
+      </a> -->
       <a href="#" onclick="loadSystemSettings()">
         <img src="./icons/settings.svg" alt="Settings Icon" class="icon" />
         System Settings
@@ -105,6 +106,10 @@ $orgId = $_SESSION['orgId'];
 
   <main class="main-section"></main>
 
+  <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
   <script src="script-org.js"></script>
 </body>
 
