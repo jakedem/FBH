@@ -9,17 +9,8 @@ if (!isset($_SESSION['orgId'])) {
 $orgName = isset($_SESSION['orgName']) ? $_SESSION['orgName'] : 'Organization';
 $orgId = $_SESSION['orgId'];
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "fbh";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-  echo json_encode(array("error" => "Connection failed: " . $conn->connect_error));
-  exit();
-}
+// Include the external database connection script
+include 'db-connect.php';
 
 $feedbackTableName = str_replace(' ', '_', $orgName) . "_" . $orgId . "_fb";
 $sql = "SELECT feedbackType, COUNT(*) as count FROM $feedbackTableName GROUP BY feedbackType";

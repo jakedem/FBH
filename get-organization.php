@@ -1,17 +1,6 @@
 <?php
-// Database connection
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "fbh";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $database);
-
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
+// Include the external database connection script
+include 'db-connect.php';
 
 // Check the filter value
 $filter = isset($_GET['filter']) ? $_GET['filter'] : 'all';
@@ -38,7 +27,7 @@ if ($result->num_rows > 0) {
     echo "<td>";
     echo "<button class='view' data-org-id='" . $row["orgId"] . "'>View</button>";
     echo "<button class='approve' data-org-id='" . $row["orgId"] . "'>Approve</button>";
-    echo "<button class='terminate'>Terminate</button>";
+    echo "<button class='terminate' data-org-id='" . $row["orgId"] . "'>Terminate</button>";
     echo "</td>";
     echo "</tr>";
   }

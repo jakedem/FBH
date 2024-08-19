@@ -5,25 +5,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Organization Landing Page</title>
-  <link rel="stylesheet" href="./styles/organization-landing-page.css">
+  <link rel="stylesheet" href="styles/360.css">
 </head>
 
-<body>
-  <header>
-    <?php
-    // Check if organization name and ID are provided
-    $orgName = isset($_GET['orgName']) ? $_GET['orgName'] : 'Organization';
-    $orgId = isset($_GET['orgId']) ? $_GET['orgId'] : '';
-    // Display welcome message with organization name
-    echo "<h1>Welcome {$orgName} to Feedback Hub 360</h1>";
-    ?>
-    <!-- Echo Organization Name and ID -->
-    <p>Organization Name: <?php echo $orgName; ?></p>
-    <p>Organization ID: <?php echo $orgId; ?></p>
+<body class="light-grey-background">
+  <?php
+  // Check if organization name and ID are provided
+  $orgName = isset($_GET['orgName']) ? $_GET['orgName'] : 'Organization';
+  $orgId = isset($_GET['orgId']) ? $_GET['orgId'] : '';
+  // Display welcome message with organization name
+  // echo "<h1 class='centered-org-name'>{$orgName}</h1>";
+  ?>
+  <header class="full-width-header">
     <nav>
-      <!-- Your navigation links go here -->
-      <ul>
-        <li><a href="home.php?orgName=<?php echo urlencode($orgName); ?>&orgId=<?php echo $orgId; ?>">Home</a></li>
+      <ul class="nav-links">
+        <li class="logo">
+          <span class="white-text">Feedback</span>
+          <span class="red-text">Hub360</span>
+        </li>
+
         <li><a href="about.php?orgName=<?php echo urlencode($orgName); ?>&orgId=<?php echo $orgId; ?>">About</a></li>
         <li><a href="contact.php?orgName=<?php echo urlencode($orgName); ?>&orgId=<?php echo $orgId; ?>">Contact</a></li>
         <li><a href="organization-signup.php?orgName=<?php echo urlencode($orgName); ?>&orgId=<?php echo $orgId; ?>">Sign Up</a></li>
@@ -32,23 +32,43 @@
     </nav>
   </header>
 
-  <main>
-    <div class="content">
-      <h2>About Feedback Hub 360</h2>
-      <p>Welcome to Feedback Hub 360, where feedback meets innovation!</p>
-      <p>At Feedback Hub 360, we understand the importance of listening to your customers, employees, and stakeholders. That's why we've created a powerful platform to help you collect, manage, and act on feedback effectively.</p>
-      <p>Our platform empowers organizations of all sizes to:</p>
-      <p>Collect feedback through customizable surveys and forms</p>
-      <p>Analyze feedback data in real-time with advanced reporting and analytics</p>
-      <p>Engage with customers and employees to foster meaningful interactions</p>
-      <p>Take actionable steps to improve products, services, and processes based on valuable insights</p>
-      <p>Whether you're looking to enhance customer satisfaction, improve employee engagement, or innovate your products and services, Feedback Hub 360 provides the tools and insights you need to succeed.</p>
-      <p>Join us on this journey of feedback-driven growth and innovation!</p>
+  <main class="light-grey-background">
+
+    <?php
+    // Check if organization name and ID are provided
+    // $orgName = isset($_GET['orgName']) ? $_GET['orgName'] : 'Organization';
+    // $orgId = isset($_GET['orgId']) ? $_GET['orgId'] : '';
+    // Display welcome message with organization name
+    echo "<h1 class='centered-org-name'>{$orgName}</h1>";
+    ?>
+
+    <div class="content-container">
+      <!-- First Row -->
+      <div class="text-column">
+        <h2 class="large-text special-font">Elevate Your</h2>
+        <h2 class="large-text blue-text special-font">Feedback</h2>
+        <h2 class="large-text special-font">With Our App</h2>
+      </div>
+      <div class="image-column">
+        <!-- Placeholder for Text Image -->
+
+      </div>
+
+      <!-- Second Row -->
+      <div class="read-more-column special-font">
+        <p>Unlock valuable insights and drive</p>
+        <p>continuous improvement with our</p>
+        <p>intuitive feedback app</p>
+      </div>
+      <div class="login-column">
+        <p class="admin-text">Administrator Please Login in here</p>
+        <br><a href="organization-admin-login.php?orgName=<?php echo urlencode($orgName); ?>&orgId=<?php echo $orgId; ?>">Admin Login</a>
+      </div>
     </div>
   </main>
 
   <footer>
-    <p>&copy; <?php echo date("Y"); ?> Feedback Hub360</p>
+    <p class="center-text">&copy; <?php echo date("Y"); ?> Feedback Hub360</p>
   </footer>
 </body>
 

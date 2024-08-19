@@ -1,18 +1,6 @@
 <?php
-// Establish a database connection
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "fbh";
-
-// Create connection
-$connection = mysqli_connect($servername, $username, $password, $database);
-
-// Check connection
-if (!$connection) {
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
-  exit();
-}
+// Include the external database connection script
+include 'db-connect.php';
 
 // Check if the search query parameter is set
 if (isset($_GET['searchQuery'])) {

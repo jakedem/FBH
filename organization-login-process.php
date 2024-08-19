@@ -3,19 +3,8 @@ session_start(); // Start the session
 
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  // Database connection parameters
-  $servername = "localhost";
-  $username = "root";
-  $password = "";
-  $dbname = "fbh";
-
-  // Create connection
-  $conn = new mysqli($servername, $username, $password, $dbname);
-
-  // Check connection
-  if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-  }
+  // Include the external database connection script
+  include 'db-connect.php';
 
   // Retrieve organization name and ID from the form submission
   $orgName = isset($_POST['orgName']) ? strtolower($_POST['orgName']) : 'organization';
@@ -35,6 +24,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $stmt->execute();
   $result = $stmt->get_result();
 
+  // Prepare response array
+  $response = array();
+
   // Check if the user was found
   if ($result->num_rows == 1) {
     // User found, fetch user data
@@ -48,15 +40,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $_SESSION['orgName'] = $orgName;
     $_SESSION['orgId'] = $orgId;
 
-    // Redirect to the user dashboard
-    header("Location: organization-user.php");
-    exit();
+    // Set success response
+    $response['status'] = 'success';
   } else {
-    // User not found, display error message
-    echo "Invalid username or password.";
+    // User not found, set error response
+    $response['status'] = 'error';
+    $response['message'] = 'Invalid username or password.';
   }
 
   // Close the prepared statement and database connection
   $stmt->close();
   $conn->close();
+
+  // Return JSON response
+  echo json_encode($response);
 }

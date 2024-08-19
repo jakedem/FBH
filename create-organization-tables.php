@@ -1,17 +1,6 @@
 <?php
-// Your database connection parameters
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "fbh";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
+// Include the external database connection script
+include 'db-connect.php';
 
 // Retrieve organizations with approval status not null or empty
 $sql = "SELECT orgId, orgName FROM Organizations WHERE approval_status IS NOT NULL AND approval_status != ''";

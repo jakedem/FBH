@@ -38,10 +38,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $stmtOrg = $conn->prepare($sqlOrg);
   $stmtOrg->bind_param("ssss", $orgId, $orgName, $orgType, $address);
 
-  // Prepare SQL statement to insert admin data
+  // Hash the admin password
+  $hashedPassword = password_hash($adminPassword, PASSWORD_DEFAULT);
+
+  // Prepare SQL statement to insert admin data with hashed password
   $sqlAdmin = "INSERT INTO Admins (orgId, adminName, adminEmail, adminPassword) VALUES (?, ?, ?, ?)";
   $stmtAdmin = $conn->prepare($sqlAdmin);
-  $stmtAdmin->bind_param("ssss", $orgId, $adminName, $adminEmail, $adminPassword);
+  $stmtAdmin->bind_param("ssss", $orgId, $adminName, $adminEmail, $hashedPassword);
 
   // Execute the prepared statements
   if ($stmtOrg->execute() && $stmtAdmin->execute()) {

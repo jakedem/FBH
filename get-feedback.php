@@ -12,21 +12,8 @@ if (!isset($_SESSION['orgId'])) {
 $orgName = isset($_SESSION['orgName']) ? $_SESSION['orgName'] : 'Organization';
 $orgId = $_SESSION['orgId'];
 
-// Your database connection parameters
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "fbh";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-  // If connection fails, return an error message
-  echo json_encode(array("error" => "Connection failed: " . $conn->connect_error));
-  exit();
-}
+// Include the external database connection script
+include 'db-connect.php';
 
 // Construct SQL query to select basic feedback details from dynamic feedback table
 $feedbackTableName = str_replace(' ', '_', $orgName) . "_" . $orgId . "_fb";

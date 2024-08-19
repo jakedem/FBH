@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Send Email</title>
+    <link rel="stylesheet" href="styles/email.css" />
+    <link rel="stylesheet" href="./styles/index.css" />
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+  <body>
+    <main class="main-section-send-mail">
+      <form id="sendEmailForm" action="send-mail.php" method="POST">
+        <h2>Send Email</h2>
+        <label for="to">To:</label>
+        <input type="email" id="to" name="to" required /><br /><br />
+
+        <label for="subject">Subject:</label>
+        <input type="text" id="subject" name="subject" required /><br /><br />
+
+        <label for="message">Message:</label><br />
+        <textarea
+          id="message"
+          name="message"
+          rows="4"
+          cols="50"
+          required
+        ></textarea
+        ><br /><br />
+
+        <input type="submit" value="Send Email" />
+      </form>
+    </main>
+
+    <script>
+      document
+        .getElementById("sendEmailForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // Prevent the default form submission
+
+          const formData = new FormData(this);
+
+          fetch("send-mail.php", {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => response.text())
+            .then((result) => {
+              if (result.includes("Email sent successfully!")) {
+                Swal.fire("Success", "Email sent successfully!", "success");
+              } else if (result.includes("Invalid email address.")) {
+                Swal.fire("Error", "Invalid email address.", "error");
+              } else {
+                Swal.fire("Error", "Failed to send email.", "error");
+              }
+            })
+            .catch((error) => {
+              Swal.fire(
+                "Error",
+                "There was an error processing your request.",
+                "error"
+              );
+            });
+        });
+    </script>
+  </body>
+</html>

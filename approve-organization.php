@@ -1,18 +1,8 @@
 <?php
 
-// Database connection
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "fbh";
+// Include the external database connection script
+include 'db-connect.php';
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $database);
-
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
 
 // Get the organization ID from the POST request
 $orgId = isset($_POST['orgId']) ? $_POST['orgId'] : '';

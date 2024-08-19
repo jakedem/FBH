@@ -22,18 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $userId = $_SESSION['userId'];
 
   // Database connection parameters
-  $servername = "localhost";
-  $username = "root";
-  $password = "";
-  $dbname = "fbh";
-
-  // Create connection
-  $conn = new mysqli($servername, $username, $password, $dbname);
-
-  // Check connection
-  if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-  }
+  include 'db-connect.php';
 
   // Construct SQL query to insert feedback into database table
   $feedbackTableName = str_replace(' ', '_', $orgName) . "_" . $orgId . "_fb";

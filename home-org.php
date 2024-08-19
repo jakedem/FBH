@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="./styles/home.css" />
   <link rel="stylesheet" href="./styles/index.css" />
   <!-- <link rel="stylesheet" href="./styles/barchart.css"> -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>

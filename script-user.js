@@ -1,5 +1,5 @@
 function loadHome() {
-  fetch("home.php")
+  fetch("home-user.php")
     .then((response) => response.text())
     .then((html) => {
       document.querySelector(".main-section").innerHTML = html;

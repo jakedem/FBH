@@ -1,22 +1,33 @@
+
 <?php
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  // Database connection parameters
-  $servername = "localhost";
-  $username = "root";
-  $password = "";
-  $dbname = "fbh";
+  // Include the external database connection script
+  include 'db-connect.php';
 
-  // Create connection
-  $conn = new mysqli($servername, $username, $password, $dbname);
+  // Retrieve form inputs
+  $orgName = isset($_POST['orgName']) ? strtolower($_POST['orgName']) : 'organization';
+  $orgId = isset($_POST['orgId']) ? $_POST['orgId'] : '';
+  $fullname = $_POST['fullname'];
+  $email = $_POST['email'];
+  $password = $_POST['password'];
+  $confirmPassword = $_POST['confirm_password'];
 
-  // Check connection
-  if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+  // Validate password
+  if (
+    strlen($password) <= 8 ||
+    !preg_match("#[0-9]+#", $password) ||
+    !preg_match("#[^\w]+#", $password)
+  ) {
+    echo "Password must be more than 8 characters long, and include at least one number and one special character.";
+    exit();
   }
 
-  // Retrieve organization name from the form submission
-  $orgName = isset($_POST['orgName']) ? strtolower($_POST['orgName']) : 'organization';
+  // Check if passwords match
+  if ($password !== $confirmPassword) {
+    echo "Passwords do not match.";
+    exit();
+  }
 
   // Find the corresponding organization ID in the database
   $sql = "SELECT orgId FROM Organizations WHERE orgName = ?";
@@ -27,7 +38,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   // Check if the SQL query was successful
   if (!$result) {
-    die("Error executing SQL query: " . $conn->error);
+    echo "Error executing SQL query: " . $conn->error;
+    exit();
   }
 
   // Check if any rows were returned
@@ -39,11 +51,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Determine the table name based on the organization name and ID
     $tableName = str_replace(' ', '_', $orgName) . "_$orgId";
 
-    // Retrieve user details from the form
-    $fullname = $_POST['fullname'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
     // Insert user details into the respective organization's table, including orgId
     $sql = "INSERT INTO $tableName (fullname, email, password, orgId) VALUES (?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
@@ -51,13 +58,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Execute the prepared statement
     if ($stmt->execute()) {
-      // Close the prepared statement and database connection
-      $stmt->close();
-      $conn->close();
-
-      // Redirect the user to a success page
-      header("Location: success.php");
-      exit();
+      // Respond with a success message
+      echo "success";
     } else {
       // Handle the case where insertion fails
       echo "Error executing SQL statement: " . $stmt->error;
@@ -65,7 +67,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   } else {
     // Handle the case where organization ID retrieval fails
     echo "Organization not found or multiple organizations found with the same name.";
-    exit();
   }
 
   // Close the prepared statement and database connection

@@ -3,19 +3,8 @@ session_start(); // Start the session
 
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  // Database connection parameters
-  $servername = "localhost";
-  $username = "root";
-  $password = "";
-  $dbname = "fbh";
-
-  // Create connection
-  $conn = new mysqli($servername, $username, $password, $dbname);
-
-  // Check connection
-  if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-  }
+  // Include the external database connection script
+  include 'db-connect.php';
 
   // Retrieve username and password from the form
   $username = $_POST["username"];
@@ -49,20 +38,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Store the admin's name in the session
     $_SESSION['adminName'] = $adminName;
 
-    // Redirect the user to the admin dashboard if login is successful
-    header("Location: organization-admin-dashboard.php");
-    exit(); // Stop further execution
+    // Respond with success
+    echo json_encode(['status' => 'success', 'message' => 'Login successful']);
   } else {
-    // Redirect the user back to the login page with an error message
-    header("Location: organization-admin-login.php?error=login_failed");
-    exit(); // Stop further execution
+    // Respond with an error
+    echo json_encode(['status' => 'error', 'message' => 'Invalid username or password']);
   }
 
   // Close the prepared statement and database connection
   $stmt->close();
   $conn->close();
 } else {
-  // Redirect the user back to the login page if form is not submitted
+  // Redirect if form is not submitted
   header("Location: organization-admin-login.php");
-  exit(); // Stop further execution
+  exit();
 }

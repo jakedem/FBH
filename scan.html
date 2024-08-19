@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Performance and Security</title>
+    <link rel="stylesheet" href="styles/scan.css" />
+  </head>
+  <body>
+    <main class="main-section-scan">
+      <div class="container">
+        <!-- Performance and Security Scan -->
+        <div class="row">
+          <h1>Performance and Security Scan</h1>
+          <button id="scanButton" class="scan-button">Scan System</button>
+          <div id="scanResults">
+            <h3 class="scan-results">Performance Scan Results</h3>
+            <div id="performanceResults"></div>
+            <div id="expandButton">Expand to show more details</div>
+            <div id="additionalDetails"></div>
+          </div>
+          <div id="securityResults">
+            <h3 class="scan-results">Security Scan Results</h3>
+            <div id="securityScan"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      document
+        .getElementById("scanButton")
+        .addEventListener("click", function () {
+          fetch("scan.php")
+            .then((response) => response.json())
+            .then((data) => {
+              // Display Performance Scan Results
+              const performanceResultsDiv =
+                document.getElementById("performanceResults");
+              performanceResultsDiv.innerHTML = `
+                        <p><strong>Slow Queries:</strong> ${
+                          Array.isArray(data.slowQueries)
+                            ? data.slowQueries.length
+                            : "0"
+                        } found</p>
+                    `;
+
+              // Display additional details with expand/collapse functionality
+              const additionalDiv =
+                document.getElementById("additionalDetails");
+              additionalDiv.innerHTML = `
+                        <h4>Table Sizes</h4>
+                        <ul>${data.tableSizes
+                          .map(
+                            (item) =>
+                              `<li>${item.Table}: ${item["Size (MB)"]} MB</li>`
+                          )
+                          .join("")}</ul>
+                        <h4>Index Usage</h4>
+                        <ul>${data.indexUsage
+                          .map(
+                            (item) =>
+                              `<li>Table: ${item.table_name}, Index: ${item.index_name}, Column: ${item.column_name}</li>`
+                          )
+                          .join("")}</ul>
+                    `;
+
+              document.getElementById("expandButton").style.display = "block";
+              additionalDiv.style.display = "none"; // Initially hide
+
+              // Display Security Scan Results
+              const securityScanDiv = document.getElementById("securityScan");
+              securityScanDiv.innerHTML = `
+                        <p>${
+                          Array.isArray(data.passwordVulnerabilities)
+                            ? `Password vulnerabilities found: ${data.passwordVulnerabilities.length}`
+                            : "No password vulnerabilities found"
+                        }</p>
+                    `;
+            });
+        });
+
+      document
+        .getElementById("expandButton")
+        .addEventListener("click", function () {
+          const additionalDiv = document.getElementById("additionalDetails");
+          additionalDiv.style.display =
+            additionalDiv.style.display === "none" ? "block" : "none";
+        });
+    </script>
+  </body>
+</html>

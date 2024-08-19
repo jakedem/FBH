@@ -10,21 +10,9 @@ if (!isset($_SESSION['orgId'])) {
 
 $orgId = $_SESSION['orgId'];
 
-// Your database connection parameters
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "fbh";
+// Include the external database connection script
+include 'db-connect.php';
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-  // If connection fails, return an error message
-  echo json_encode(array("error" => "Connection failed: " . $conn->connect_error));
-  exit();
-}
 
 // Prepare SQL statement to select anonymous feedback count from dynamic feedback table
 $tableName = str_replace(' ', '_', $_SESSION['orgName']) . "_$orgId" . "_fb";

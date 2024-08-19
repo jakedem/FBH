@@ -1,0 +1,161 @@
+/* Basic reset */
+* {
+  padding-left: 0;
+  margin-left: 0;
+  
+  margin-right: 0;
+  margin-top: 0;
+}
+
+/* General Styles */
+main.light-grey-background {
+  background-color: #f0f0f0;
+}
+
+.logo {
+  font-size: 1.5em; /* Increased font size */
+  font-weight: bold;
+}
+
+.white-text {
+  color: #ffffff; /* Blue color for Feedback */
+}
+
+.red-text {
+  color: #ff0000; /* Red color for Hub 360 */
+}
+
+.full-width-header {
+  padding-top: 1.5%;
+  width: 100%;
+  background-color: rgba(0, 110, 255, 0.781);
+  height: 60px;
+}
+
+.white-background {
+  background-color: #ffffff;
+}
+
+.centered-org-name {
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  padding-top: 20px;
+}
+
+/* Layout and Grid */
+.content-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 80px;
+  padding-top: 30px;
+}
+
+.content-container div {
+  padding: 20px;
+}
+
+/* Specific background images for the selected columns */
+.text-column {
+  /* background: url('../icons/shot1.png') no-repeat center center; */
+  /* background-size: cover; */
+  text-align: left;
+}
+
+.image-column {
+  background: url('../icons/shot2.png') no-repeat center center;
+  background-size: cover;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Background image for the read-more-column */
+.read-more-column {
+  
+  text-align: left;
+}
+
+.login-column {
+  /* background: url('../icons/shot3.png') no-repeat center center; */
+  background-size: cover;
+  text-align: center;
+}
+
+/* Vertical Centering */
+.vertical-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Styling */
+.large-text {
+  font-size: 2.5em;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+}
+
+.blue-text {
+  color: rgb(0, 81, 255);
+}
+
+.nav-links {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  padding: 10px 20px;
+  margin: 0;
+  font-size: 1.0em;
+}
+
+.nav-links li {
+  margin-left: 20px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 1.2em;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+  color: rgb(255, 0, 0); /* Blue color on hover */
+}
+
+.special-font {
+  font-family: 'Georgia', serif;
+}
+
+.admin-text {
+  font-weight: bold;
+  font-style: italic;
+}
+
+.center-text {
+  text-align: center;
+  /* padding-top: 30px; */
+}
+
+/* Alignment */
+.left-align {
+  text-align: left;
+}
+
+footer {
+  color: white;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding-top: 20px;
+  background-color: rgba(0, 110, 255, 0.781); /* Optional: Add background color */
+  text-align: center; /* Optional: Center the text */
+}
